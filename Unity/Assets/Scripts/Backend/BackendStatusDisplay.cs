@@ -161,6 +161,9 @@ namespace Backend
 
             // 3. Log Window (하단 패널)
             CreateLogWindow();
+
+            // 4. Toggle Hint Text (우측 상단)
+            CreateToggleHintText();
         }
 
         private void CreatePlayerIDText()
@@ -219,6 +222,31 @@ namespace Backend
             textRect.offsetMax = new Vector2(-10, -10);
             
             _logPanelObj.SetActive(showLogWindow);
+        }
+
+        private void CreateToggleHintText()
+        {
+            var textObj = new GameObject("ToggleHintText");
+            // 검은색 패널(_logPanelObj)의 자식으로 설정
+            textObj.transform.SetParent(_logPanelObj.transform, false);
+            
+            var hintText = textObj.AddComponent<Text>();
+            hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            hintText.alignment = TextAnchor.UpperRight;
+            hintText.text = $"Log: {toggleKey}";
+            hintText.fontSize = 20;
+            hintText.color = Color.white;
+            
+            // RectTransform 설정 (Top-Right)
+            RectTransform rect = hintText.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(1, 1);
+            rect.anchorMax = new Vector2(1, 1);
+            rect.pivot = new Vector2(1, 1);
+            rect.anchoredPosition = new Vector2(-10, -10);
+            rect.sizeDelta = new Vector2(200, 50);
+            
+            // 그림자 효과
+            textObj.AddComponent<Outline>().effectDistance = new Vector2(1, -1);
         }
     }
 }
