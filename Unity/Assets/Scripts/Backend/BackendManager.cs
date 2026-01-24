@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -37,6 +38,20 @@ namespace Backend
                     Debug.Log($"BackendManager: Signed in as {AuthenticationService.Instance.PlayerId}");
                 }
             }
+            catch (AuthenticationException ex)
+            {
+                // Compare error code to AuthenticationErrorCodes
+                // Notify the player with the proper error message
+                Debug.LogException(ex);
+                throw;
+            }
+            catch (RequestFailedException ex)
+            {
+                // Compare error code to CommonErrorCodes
+                // Notify the player with the proper error message
+                Debug.LogException(ex);
+                throw;
+            }
             catch (Exception e)
             {
                 Debug.LogError($"BackendManager Initializaion Failed: {e.Message}");
@@ -44,7 +59,7 @@ namespace Backend
             }
         }
 
-        public async Task<T> CallCloudFunction<T>(string functionName, object args)
+        public async Task<T> CallCloudFunction<T>(string functionName, Dictionary<string, object> args)
         {
             try
             {
