@@ -1,30 +1,30 @@
-# Team Collaboration Rules
+# 팀 협업 규칙
 
-## 1. Version Control (Git)
-- **Commit Messages**: [Type]: Description
-  - `feat`: New feature
-  - `fix`: Bug fix
-  - `refactor`: Code restructuring
-  - `chore`: Meta tasks (build, tools)
-  - `docs`: Documentation
-  - *Example*: `feat: Add Offline Reward Logic`
+## 1. 버전 관리 (Git)
+- **커밋 메시지**: [유형]: 설명
+  - `feat`: 새로운 기능
+  - `fix`: 버그 수정
+  - `refactor`: 코드 구조 개선 (리팩토링)
+  - `chore`: 잡무 (빌드, 도구 설정 등)
+  - `docs`: 문서
+  - *예시*: `feat: 오프라인 보상 로직 추가`
 
-## 2. Scene Management
-- **Rule**: Avoid working on the same Scene file simultaneously.
-- **Prefab First**: Make everything a Prefab. Edit Prefabs instead of scene objects.
-- **Scene Split**:
-  - `MainScene` (Managers, Persistent objects)
+## 2. 씬(Scene) 관리
+- **규칙**: 같은 씬 파일을 동시에 작업하지 마십시오.
+- **프리팹 우선**: 모든 것을 프리팹으로 만드십시오. 씬 오브젝트 대신 프리팹을 편집하십시오.
+- **씬 분할**:
+  - `MainScene` (매니저, 지속성 오브젝트)
   - `UIScene` (Canvas, HUD)
-  - `GameScene` (Gameplay elements)
-  - Use `SceneManager.LoadScene(..., LoadSceneMode.Additive)` to combine them.
+  - `GameScene` (게임플레이 요소)
+  - `SceneManager.LoadScene(..., LoadSceneMode.Additive)`를 사용하여 이들을 조합하십시오.
 
-## 3. Code Review
-- **Language**: Comments in Code Review should be in Korean.
-- **Checklist**:
-  - Does it follow `unity_coding_rules.md`?
-  - Is text localized (`l10n_rules.md`)?
-  - Are big numbers handled correctly (`idle_game_patterns.md`)?
+## 3. 코드 리뷰
+- **언어**: 코드 리뷰의 코멘트는 한국어로 작성해야 합니다.
+- **체크리스트**:
+  - `unity_coding_rules.md`를 따르는가?
+  - 텍스트가 로컬라이징되었는가 (`l10n_rules.md`)?
+  - 큰 숫자가 올바르게 처리되었는가 (`idle_game_patterns.md`)?
 
-## 4. Review Etiquette
-- Be constructive.
-- Focus on logic and stability, not personal preference (unless strict style guide violation).
+## 4. 리뷰 에티켓
+- 건설적으로 임하십시오.
+- 개인적인 취향이 아닌 로직과 안정성에 집중하십시오 (엄격한 스타일 가이드 위반이 아닌 경우).
