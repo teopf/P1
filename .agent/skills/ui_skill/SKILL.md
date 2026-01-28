@@ -8,6 +8,8 @@ Methodology: Atomic Design (Atoms -> Molecules -> Organisms -> Templates)
 Target Platform: Android/iOS Mobile (Portrait/Landscape adaptive)
 ---
 
+This skill creates a new UI Panel script and sets up the basic structure for UGUI + DOTween interactions.
+
 ## Workflow Rules (Instructions)
 1. **Hierarchy Decomposition**: 이미지의 계층 구조를 최상단 부모(Canvas/Panel)부터 말단 자식(Button/Text)까지 트리 구조로 분해합니다.
 2. **Zone Definition**: 화면 영역을 Header(Top), Footer(Bottom), Body(Content), Overlay(Popup)로 명확히 구분하여 모듈화합니다
@@ -17,9 +19,8 @@ Target Platform: Android/iOS Mobile (Portrait/Landscape adaptive)
 6. **Safe Area**: iPhone Notch, Android Camera Hole 대응이 필요한 상단/하단 패널은 반드시 Safe Area 처리 방침을 명시합니다.
 7. **Interaction Definition**: 단순 클릭 이외의 기술적 요구사항을 파악하여 명시합니다: Toggle Group (라디오 버튼 탭), Scroll Rect (기본 스크롤), Object Pooling (무한 스크롤/대량 데이터)
 
-
 ## Output Structure Template
-1. 모든 분석 응답은 다음 구조를 엄격히 따릅니다:
+1. 모든 응답에는 이 스킬을 얼마나 참고했는지 %를 명시해줄 것(예: 참고율: 90%)
 2. Summary: 구현 목표 요약 (Trigger 조건, Close 조건, Modal 여부 포함)
 3. Layout Structure: 모듈별 상세 스펙 (Atomic Level 분해, 계층 순서대로 기술)
 4. Technical Specs: 주요 컬러값(Hex), 앵커링(Anchoring) 전략, 인터랙션 로직
@@ -39,11 +40,11 @@ Target Platform: Android/iOS Mobile (Portrait/Landscape adaptive)
 3. Match: Width(0) 혹은 Height(1) (세로형 게임은 보통 Width 0.5 ~ 1 권장)
 **Atlas & 9-Slice (최적화)**
 1. 모든 UI 이미지(버튼, 패널 배경)는 Sprite Atlas로 패킹하여 Draw Call 최소화.
-2. AC101, AD101 등의 배경 박스는 해상도 대응 시 모서리 왜곡 방지를 위해 9-Slice (Sliced Sprite) 설정 필수.
+2. 배경 박스는 해상도 대응 시 모서리 왜곡 방지를 위해 9-Slice (Sliced Sprite) 설정 필수.
 **Raycast Blocking 제어**
 1. 모달 팝업 활성화 시, 뒤쪽(HUD) 터치 방지를 위해 반투명 배경(Image with Alpha)에 Raycast Target: On 설정.
 2. 터치가 불필요한 단순 텍스트, 아이콘, 데코레이션 이미지는 Raycast Target: Off를 명시하여 성능 확보.
 **Auto Layout & Content Size Fitter**
-1. 내용물에 따라 크기가 가변적인 요소(예: AA102 라디오 버튼 그룹)는 Content Size Fitter와 Horizontal Layout Group의 조합 설정을 구체적으로 명시.
+1. 내용물에 따라 크기가 가변적인 요소(예: 라디오 버튼 그룹)는 Content Size Fitter와 Horizontal Layout Group의 조합 설정을 구체적으로 명시.
 
 

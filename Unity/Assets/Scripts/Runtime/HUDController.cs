@@ -2,85 +2,160 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class HUDController : MonoBehaviour
 {
-    private GameObject subMenuCanvas;
+    // Dictionary to manage multiple sub-menus: "a1" -> CanvasObj
+    private Dictionary<string, GameObject> subMenus = new Dictionary<string, GameObject>();
+
+    // Mapping button IDs to Canvas Names
+    private readonly Dictionary<string, string> buttonToCanvasMap = new Dictionary<string, string>()
+    {
+        { "a1", "SubMenu_Canvas" },
+        { "a2", "Canvas_A2_Inventory" },
+        { "Chat", "Canvas_ChatOverlay" } // Maps "Chat" button to Overlay
+    };
 
     private void Awake()
     {
-        // Find SubMenu Canvas (even if inactive)
-        subMenuCanvas = FindInactiveObject("SubMenu_Canvas");
-
-        // Find all buttons in HUD (this hierarchy)
-        List<Button> allButtons = new List<Button>();
-        allButtons.AddRange(GetComponentsInChildren<Button>(true));
-
-        // Find buttons in SubMenu if available
-        if (subMenuCanvas != null)
+        // 1. Register known sub-menus from map
+        foreach (var kvp in buttonToCanvasMap)
         {
-            allButtons.AddRange(subMenuCanvas.GetComponentsInChildren<Button>(true));
+            var canvasObj = FindInactiveObject(kvp.Value);
+            if (canvasObj != null)
+            {
+                subMenus[kvp.Key] = canvasObj;
+            }
         }
 
-        foreach (var btn in allButtons)
+        // 2. Setup HUD Buttons (Local)
+        List<Button> hudButtons = new List<Button>();
+        hudButtons.AddRange(GetComponentsInChildren<Button>(true));
+
+        foreach (var btn in hudButtons)
         {
             string btnName = btn.name;
-            
-            // Remove existing listeners just in case
+            string id = btnName.Replace("Btn_Menu_", "").Replace("Btn_Action_", "");
+
             btn.onClick.RemoveAllListeners();
 
-            if (btnName == "a99" || btnName == "b101")
+            if (id == "a99" || btnName.Contains("Close")) // Global Close in HUD ?
             {
                 btn.onClick.AddListener(() => OnCloseAllClicked(btn));
             }
-            else if (btnName == "a1")
+            else if (buttonToCanvasMap.ContainsKey(id))
             {
-                 btn.onClick.AddListener(() => OnMenuToggleClicked(btn));
+                btn.onClick.AddListener(() => OnMenuToggleClicked(btn, id));
             }
             else
             {
-                // Capture variable for lambda closure
-                string id = btnName;
                 btn.onClick.AddListener(() => OnGenericButtonClicked(id));
+            }
+        }
+        
+        // 3. GLOBAL: Find "b101" (Close) buttons in ALL Canvases (Scene)
+        // This ensures ANY menu with a b101 button will close itself when clicked.
+        RegisterGlobalCloseButtons();
+    }
+
+    private void RegisterGlobalCloseButtons()
+    {
+        // Find all Canvases in component list (including inactive root objects if we use Resources.FindObjectsOfTypeAll with filtering)
+        // Note: FindObjectsOfType<Canvas>(true) checks all active/inactive in SCENE (Unity 2020+)
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>(true);
+
+        foreach (var canvas in allCanvases)
+        {
+            if (canvas.name == "HUD_Canvas") continue; // Skip self
+
+            // Find b101 or Btn_Close_b101 recursively
+            var buttons = canvas.GetComponentsInChildren<Button>(true);
+            foreach (var btn in buttons)
+            {
+                if (btn.name == "b101" || btn.name == "Btn_Close_b101")
+                {
+                    // Remove existing to avoid duplicates if other controllers added them
+                    // But be careful if other controllers add CRITICAL logic. 
+                    // User request: "b101 returns to HUD screen" -> Implies Close Canvas.
+                    
+                    // We simply AddListener. Unity allows multiple listeners.
+                    // If we want to override, we'd remove. But safely appending is better unless it conflicts.
+                    // Given the request "Create handle...", let's assume valid Close behaviour.
+                    
+                    btn.onClick.AddListener(() => 
+                    {
+                        Debug.Log($"Global Close: Closing {canvas.name} via {btn.name}");
+                        StartCoroutine(AnimateButtonPunch(btn.transform));
+                        
+                        // Close the canvas
+                        canvas.gameObject.SetActive(false);
+                        
+                        // Reset HUD state
+                        OnSubMenuClosed();
+                    });
+                    
+                    Debug.Log($"HUDController: Wired 'Close' logic to {btn.name} in {canvas.name}");
+                }
             }
         }
     }
 
-    private void OnMenuToggleClicked(Button btn)
+    private void OnMenuToggleClicked(Button btn, string id)
     {
-        Debug.Log("HUDController: 'a1' clicked. Toggling Sub-Menu...");
+        Debug.Log($"HUDController: '{id}' clicked.");
         
-        if (subMenuCanvas != null)
+        // 1. Close all OTHER menus
+        foreach (var kvp in subMenus)
         {
-            bool isActive = subMenuCanvas.activeSelf;
-            subMenuCanvas.SetActive(!isActive);
+            if (kvp.Key != id && kvp.Value != null && kvp.Value.activeSelf)
+            {
+                kvp.Value.SetActive(false);
+            }
+        }
+
+        // 2. Toggle TARGET menu
+        if (subMenus.ContainsKey(id) && subMenus[id] != null)
+        {
+            bool isActive = subMenus[id].activeSelf;
             
-            // Optional: Animation punch on a1
-            StartCoroutine(AnimateButtonPunch(btn.transform));
+            // Just Toggle
+            subMenus[id].SetActive(!isActive);
+            
+            if (!isActive)
+            {
+                StartCoroutine(AnimateButtonPunch(btn.transform));
+            }
         }
         else
         {
-            Debug.LogError("HUDController: SubMenu_Canvas not found! Please generate it.");
-            // Retry find?
-            subMenuCanvas = FindInactiveObject("SubMenu_Canvas");
-            if (subMenuCanvas != null)
-            {
-                subMenuCanvas.SetActive(true);
-            }
+            // Try Dynamic Find
+             var canvasName = buttonToCanvasMap.ContainsKey(id) ? buttonToCanvasMap[id] : "";
+             var obj = FindInactiveObject(canvasName);
+             if (obj != null)
+             {
+                 subMenus[id] = obj;
+                 obj.SetActive(true);
+             }
         }
     }
 
     private void OnCloseAllClicked(Button btn)
     {
-        Debug.Log("HUDController: 'Close All' (a99) clicked. Closing all panels...");
-        
-        // Scale animation (Punch effect)
         StartCoroutine(AnimateButtonPunch(btn.transform));
-
-        if (subMenuCanvas != null)
+        OnSubMenuClosed();
+    }
+    
+    public void OnSubMenuClosed()
+    {
+        // Close known menus
+        foreach (var kvp in subMenus)
         {
-            subMenuCanvas.SetActive(false);
+            if (kvp.Value != null) kvp.Value.SetActive(false);
         }
+        
+        // Note: Global RegisterGlobalCloseButtons handles the specific canvas closing.
+        // This method ensures our *Tracked* menus are marked closed if we called this from HUD.
     }
 
     private void OnGenericButtonClicked(string id)
@@ -90,16 +165,13 @@ public class HUDController : MonoBehaviour
 
     private GameObject FindInactiveObject(string name)
     {
+        // Optimized find for scene objects only
         Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
-        for (int i = 0; i < objs.Length; i++)
+        foreach (var t in objs)
         {
-            // Root objects only or check hierarchy? Editor scene setup usually puts Canvases at root.
-            if (objs[i].hideFlags == HideFlags.None)
+            if (t.hideFlags == HideFlags.None && t.name == name && t.gameObject.scene.IsValid())
             {
-                if (objs[i].name == name)
-                {
-                    return objs[i].gameObject;
-                }
+                return t.gameObject;
             }
         }
         return null;
@@ -107,12 +179,10 @@ public class HUDController : MonoBehaviour
 
     private IEnumerator AnimateButtonPunch(Transform target)
     {
-        Vector3 originalScale = Vector3.one; // Assuming default is 1, but might be modified by Hover.
-        // Actually best to punch relative to current or force a set punch
-        
         float duration = 0.15f;
         float elapsed = 0f;
-
+        Vector3 originalScale = Vector3.one; 
+        
         // Scale down
         while (elapsed < duration)
         {
@@ -133,7 +203,8 @@ public class HUDController : MonoBehaviour
             target.localScale = new Vector3(scale, scale, 1f);
             yield return null;
         }
-        
         target.localScale = originalScale;
     }
 }
+
+

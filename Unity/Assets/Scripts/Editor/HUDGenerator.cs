@@ -204,8 +204,8 @@ public class HUDGenerator : EditorWindow
         
         float startY = 240; 
         
-        // b1 (Bottom-most)
-        CreateButton("b1", container.transform, sprite, COLOR_BTN_BEIGE_TOP, new Vector2(0, 0), new Vector2(0, 0),
+        // b1 (Bottom-most) -> Chat
+        CreateButton("Chat", container.transform, sprite, COLOR_BTN_BEIGE_TOP, new Vector2(0, 0), new Vector2(0, 0),
             new Vector2(40, startY + 40), new Vector2(80, 80)); 
             
         // b2
