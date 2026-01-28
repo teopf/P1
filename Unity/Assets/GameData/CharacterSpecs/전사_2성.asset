@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b9b7f7427d2e5439859e70e36dd520, type: 3}
+  m_Name: "\uC804\uC0AC_2\uC131"
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Data.CharacterSpecData
+  characterIcon: {fileID: 0}
+  characterMesh: {fileID: 0}
+  skill1: {fileID: 11400000, guid: ded50adf08b1b414991595017d87af1f, type: 2}
+  skill2: {fileID: 11400000, guid: 7f3dd9b2b5f2dd141a881f3d6681700d, type: 2}
+  skill3: {fileID: 11400000, guid: 3a5134341f88f8c40bc01241b582bbd1, type: 2}
+  baseHealth: 150
+  baseAttack: 22
+  baseDefense: 12
+  baseMoveSpeed: 3.2
+  baseAccuracy: 80
+  baseDodge: 5
+  baseCritRate: 5
+  baseCritMultiplier: 1.5
+  baseAttackSpeed: 1
+  baseHealthRegen: 1
+  baseCritResist: 0
+  baseWeaknessRate: 0
+  baseDamageReduction: 0
+  baseBonusDamageRate: 0
+  growthHealth: 15
+  growthAttack: 2.2
+  growthDefense: 1.2
+  growthAccuracy: 0.5
+  growthDodge: 0.2
+  growthCritRate: 0.3
+  growthCritMultiplier: 0.01
+  growthAttackSpeed: 0.01
+  growthHealthRegen: 0.5
+  detectionRange: 12

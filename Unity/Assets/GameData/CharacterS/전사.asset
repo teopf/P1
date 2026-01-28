@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21671e7b375b0ad46801fa2a063d48f9, type: 3}
+  m_Name: "\uC804\uC0AC"
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Data.CharacterData
+  characterName: "\uC804\uC0AC"
+  heroGrade: 1
+  star1Spec: {fileID: 11400000, guid: aef7e2d3c854c0341a6d1d35b4785c01, type: 2}
+  star2Spec: {fileID: 11400000, guid: 470bc2df347402140aaea6b51f313810, type: 2}
+  star3Spec: {fileID: 11400000, guid: 5c9be4ad69155884a955d532c47683d3, type: 2}
+  star4Spec: {fileID: 11400000, guid: 6162b20ffae82354ebe0776a3eca47dc, type: 2}
+  star5Spec: {fileID: 11400000, guid: e35bb3198aa4a03468bf2f4cc89ed43e, type: 2}

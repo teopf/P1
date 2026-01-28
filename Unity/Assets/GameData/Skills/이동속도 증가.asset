@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef11b2f7dffc44c489f9b6e2cbfe40bf, type: 3}
+  m_Name: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Data.SkillData
+  skillName: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+  skillIcon: {fileID: 0}
+  skillType: 2
+  animationClip: {fileID: 0}
+  hitTime: 0.3
+  totalActionTime: 0.8
+  cooldown: 10
+  requiredCost: 20
+  range: 0
+  rangeShape: 0
+  rangeSize: {x: 0, y: 0, z: 0}
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  attackEffect: {fileID: 0}
+  hitEffect: {fileID: 0}
+  damageFormula: ATK * 0
+  damageMultiplier: 0
+  bonusDamage: 0
