@@ -32,10 +32,43 @@ namespace Backend
                 await UnityServices.InitializeAsync();
                 Debug.Log("BackendManager: Unity Services Initialized.");
 
+                // 인증
                 if (!AuthenticationService.Instance.IsSignedIn)
                 {
                     await AuthenticationService.Instance.SignInAnonymouslyAsync();
                     Debug.Log($"BackendManager: Signed in as {AuthenticationService.Instance.PlayerId}");
+                }
+
+                // Vivox 초기화 (Instantiate if missing)
+                if (VivoxManager.Instance == null)
+                {
+                    GameObject vivoxObj = new GameObject("VivoxManager");
+                    vivoxObj.AddComponent<VivoxManager>();
+                    // Instance is set in Awake(), which is called immediately on AddComponent.
+                }
+
+                // Vivox 초기화 및 로그인 (인증 후 진행)
+                if (VivoxManager.Instance != null)
+                {
+                    bool initSuccess = await VivoxManager.Instance.InitializeAsync();
+                    
+                    if (initSuccess)
+                    {
+                        // 닉네임은 일단 PlayerId의 일부나 임시 이름 사용. 실제 게임에서는 PlayerDataManager에서 가져온 닉네임 사용 권장.
+                        string nickName = $"User_{AuthenticationService.Instance.PlayerId.Substring(0, 4)}";
+                        await VivoxManager.Instance.LoginToVivoxAsync(nickName);
+                        
+                        // 기본 글로벌 채널 입장
+                        await VivoxManager.Instance.JoinChannelAsync("GlobalChat");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("BackendManager: Vivox Initialization Failed. Chat will not be available. Please check Project Settings > Services > Vivox.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("BackendManager: VivoxManager Instance is still null after creation attempt!");
                 }
             }
             catch (AuthenticationException ex)
