@@ -29,6 +29,8 @@ namespace Game.Utility
 
         private void Start()
         {
+            Debug.Log("[CheatManager] Start 호출됨");
+            
             // TroopManager 자동 찾기
             if (troopManager == null)
             {
@@ -79,12 +81,14 @@ namespace Game.Utility
             var keyboard = UnityEngine.InputSystem.Keyboard.current;
             if (keyboard == null) return;
 
-            if (keyboard.f1Key.wasPressedThisFrame)
+            if (keyboard.f5Key.wasPressedThisFrame)  // F1 → F5로 변경
             {
+                Debug.Log("[CheatManager] F5 키 감지 - SpawnTroop 호출");
                 SpawnTroop();
             }
-            if (keyboard.f2Key.wasPressedThisFrame)
+            if (keyboard.f6Key.wasPressedThisFrame)  // F2 → F6로 변경
             {
+                Debug.Log("[CheatManager] F6 키 감지 - SpawnEnemy 호출");
                 SpawnEnemy(5);
             }
             if (keyboard.digit1Key.wasPressedThisFrame)
@@ -101,12 +105,14 @@ namespace Game.Utility
             }
 #else
             // Legacy Input 사용
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F5))  // F1 → F5로 변경
             {
+                Debug.Log("[CheatManager] F5 키 감지 - SpawnTroop 호출");
                 SpawnTroop();
             }
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(KeyCode.F6))  // F2 → F6로 변경
             {
+                Debug.Log("[CheatManager] F6 키 감지 - SpawnEnemy 호출");
                 SpawnEnemy(5);
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))

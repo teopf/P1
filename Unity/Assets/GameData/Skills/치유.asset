@@ -17,8 +17,8 @@ MonoBehaviour:
   skillType: 3
   animationClip: {fileID: 0}
   hitTime: 0.5
-  totalActionTime: 1.2
-  cooldown: 6
+  totalActionTime: 3
+  cooldown: 0
   requiredCost: 30
   range: 5
   rangeShape: 0
@@ -27,6 +27,6 @@ MonoBehaviour:
   projectileSpeed: 0
   attackEffect: {fileID: 0}
   hitEffect: {fileID: 0}
-  damageFormula: ATK * 1.0 + 50
+  damageFormula: ATK * 1.0 + 10
   damageMultiplier: 1
   bonusDamage: 50

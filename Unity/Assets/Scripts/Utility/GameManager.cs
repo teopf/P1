@@ -19,14 +19,17 @@ namespace Game.Utility
 
         private void Awake()
         {
+            Debug.Log("[GameManager] Awake 호출됨");
             if (autoSetup)
             {
+                Debug.Log("[GameManager] AutoSetup 시작");
                 AutoSetup();
             }
         }
 
         private void Start()
         {
+            Debug.Log("[GameManager] Start 호출됨");
             SetupReferences();
         }
 
@@ -73,9 +76,19 @@ namespace Game.Utility
                 cheatManager = FindObjectOfType<CheatManager>();
                 if (cheatManager == null)
                 {
+                    Debug.Log("[GameManager] CheatManager를 찾을 수 없어서 새로 생성합니다.");
                     GameObject cheatObj = new GameObject("CheatManager");
                     cheatManager = cheatObj.AddComponent<CheatManager>();
+                    Debug.Log("[GameManager] CheatManager 생성 완료!");
                 }
+                else
+                {
+                    Debug.Log("[GameManager] 기존 CheatManager를 찾았습니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("[GameManager] CheatManager가 이미 할당되어 있습니다.");
             }
         }
 

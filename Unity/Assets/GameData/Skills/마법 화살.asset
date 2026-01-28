@@ -18,7 +18,7 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   hitTime: 0.5
   totalActionTime: 1
-  cooldown: 4
+  cooldown: 0
   requiredCost: 20
   range: 10
   rangeShape: 0

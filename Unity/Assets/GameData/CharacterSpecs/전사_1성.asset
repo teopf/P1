@@ -18,7 +18,7 @@ MonoBehaviour:
   skill2: {fileID: 11400000, guid: 3a5134341f88f8c40bc01241b582bbd1, type: 2}
   skill3: {fileID: 0}
   baseHealth: 100
-  baseAttack: 15
+  baseAttack: 150
   baseDefense: 8
   baseMoveSpeed: 3
   baseAccuracy: 80
