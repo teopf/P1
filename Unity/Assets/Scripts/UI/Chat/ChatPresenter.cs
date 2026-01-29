@@ -102,7 +102,7 @@ namespace UI.Chat
         private void HandleLocalSend(string message)
         {
             // Local mode: Display the message immediately
-            string playerName = "Player"; // TODO: Get from GameData or Settings
+            string playerName = "Player"; // TODO: Get from UserData or Settings
             ChatData localData = new ChatData(playerName, message);
             _chatUI.AddMessage(localData);
             _chatUI.ClearInput();
