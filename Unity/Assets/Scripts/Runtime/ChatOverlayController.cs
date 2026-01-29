@@ -92,11 +92,8 @@ public class ChatOverlayController : MonoBehaviour
         // Animate Open
         StartCoroutine(OpenSequence());
         
-        // Refresh Chat (Mock)
-        if (contentRoot != null && contentRoot.childCount == 0)
-        {
-            AddSystemMessage("Welcome to the chat!");
-        }
+        // Welcome message is now handled by ChatPresenter if needed.
+        // ChatUI will display messages via AddMessage method.
     }
 
     private void OnDisable()
@@ -113,54 +110,15 @@ public class ChatOverlayController : MonoBehaviour
 
     private void OnSendClicked()
     {
-        // Mock Send
-        string msg = "Hello World!";
-        if (inputField != null && !string.IsNullOrEmpty(inputField.text))
-        {
-            msg = inputField.text;
-            inputField.text = "";
-        }
-        
-        AddUserMessage("Player", msg);
+        // Message sending is now handled by ChatPresenter. 
+        // This method is kept for button punch animation only.
         StartCoroutine(AnimateButtonPunch(btnSend.transform));
+        
+        // ChatPresenter listens to ChatUI.OnSendButtonClicked event for actual send logic.
+        Debug.Log("ChatOverlayController: Send button clicked. ChatPresenter handles actual send.");
     }
 
-    private void AddUserMessage(string user, string message)
-    {
-        // Create Message Object
-        GameObject msgObj = new GameObject("Message");
-        msgObj.transform.SetParent(contentRoot, false);
-        
-        Image img = msgObj.AddComponent<Image>();
-        img.color = new Color(0,0,0,0.3f);
-        
-        VerticalLayoutGroup vlg = msgObj.AddComponent<VerticalLayoutGroup>();
-        vlg.padding = new RectOffset(10, 10, 10, 10);
-        vlg.childControlHeight = true;
-        vlg.childControlWidth = true;
-        
-        ContentSizeFitter csf = msgObj.AddComponent<ContentSizeFitter>();
-        csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-        
-        GameObject textObj = new GameObject("Text");
-        textObj.transform.SetParent(msgObj.transform, false);
-        Text t = textObj.AddComponent<Text>();
-        t.text = $"<b><color=#FFD700>{user}</color></b> : {message}";
-        t.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        t.fontSize = 30;
-        t.color = Color.white;
-        t.horizontalOverflow = HorizontalWrapMode.Wrap;
-        t.verticalOverflow = VerticalWrapMode.Truncate; // Let CSF handle it? No, Overflow for height.
-        
-        // Start Scroll to Bottom
-        Canvas.ForceUpdateCanvases();
-        if(scrollRect) scrollRect.verticalNormalizedPosition = 0;
-    }
-    
-    private void AddSystemMessage(string message)
-    {
-        AddUserMessage("System", message); // Reuse logic for now
-    }
+    // AddUserMessage and AddSystemMessage are now handled by ChatUI/ChatPresenter.
 
     private IEnumerator OpenSequence()
     {

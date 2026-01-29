@@ -67,9 +67,155 @@ public class ChatMenuGenerator : EditorWindow
         // 6. Bottom Input
         CreateBottomInput(container.transform, roundedSprite);
 
+        // 7. Create Message Item Prefab (Prototype, inactive)
+        GameObject msgPrefab = CreateMessageItemPrefab(container.transform);
+
+        // 8. Attach ChatUI and ChatPresenter components
+        AttachChatComponents(canvasObj, container.transform, msgPrefab);
+
         Undo.RegisterCreatedObjectUndo(canvasObj, "Create Chat Overlay");
         Selection.activeGameObject = canvasObj;
-        Debug.Log("Chat Overlay Generated Successfully!");
+        Debug.Log("Chat Overlay Generated Successfully with ChatUI/ChatPresenter attached!");
+    }
+
+    private static GameObject CreateMessageItemPrefab(Transform parent)
+    {
+        // Create a prototype message item (hidden)
+        GameObject msgProto = CreateRect("Prefab_MessageItem", parent);
+        msgProto.SetActive(false);
+        
+        Image bg = msgProto.AddComponent<Image>();
+        bg.color = new Color(0, 0, 0, 0.3f);
+        
+        RectTransform rt = msgProto.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(700, 60); // Width, Height placeholder
+        
+        // Using TMPro for text (ChatUI expects TMP_Text)
+        GameObject textObj = new GameObject("Text_Message");
+        textObj.transform.SetParent(msgProto.transform, false);
+        TMPro.TextMeshProUGUI tmp = textObj.AddComponent<TMPro.TextMeshProUGUI>();
+        tmp.text = "Placeholder";
+        tmp.fontSize = 28;
+        tmp.color = Color.white;
+        tmp.alignment = TMPro.TextAlignmentOptions.MidlineLeft;
+        
+        RectTransform textRT = textObj.GetComponent<RectTransform>();
+        textRT.anchorMin = Vector2.zero; textRT.anchorMax = Vector2.one;
+        textRT.offsetMin = new Vector2(10, 5); textRT.offsetMax = new Vector2(-10, -5);
+        
+        // Add LayoutElement for ContentSizeFitter to work
+        UnityEngine.UI.LayoutElement le = msgProto.AddComponent<UnityEngine.UI.LayoutElement>();
+        le.preferredHeight = 60;
+        le.flexibleWidth = 1;
+        
+        return msgProto;
+    }
+
+    private static void AttachChatComponents(GameObject canvasObj, Transform containerTransform, GameObject msgPrefab)
+    {
+        // Attach ChatUI
+        UI.Chat.ChatUI chatUI = canvasObj.AddComponent<UI.Chat.ChatUI>();
+        
+        // Find references using hierarchy paths
+        Transform bottomInput = containerTransform.Find("Panel_BottomInput");
+        Transform chatContent = containerTransform.Find("Panel_ChatContent");
+        
+        // InputField (we need to add TMP_InputField since Generator created Image placeholder)
+        Transform inputMsgObj = bottomInput?.Find("Input_Message");
+        if (inputMsgObj != null)
+        {
+            // Add TMP_InputField if not present
+            TMPro.TMP_InputField tmpInput = inputMsgObj.GetComponent<TMPro.TMP_InputField>();
+            if (tmpInput == null)
+            {
+                tmpInput = inputMsgObj.gameObject.AddComponent<TMPro.TMP_InputField>();
+                
+                // Create Text Area for TMP_InputField
+                GameObject textArea = new GameObject("Text Area");
+                textArea.transform.SetParent(inputMsgObj, false);
+                RectTransform taRT = textArea.AddComponent<RectTransform>();
+                taRT.anchorMin = Vector2.zero; taRT.anchorMax = Vector2.one;
+                taRT.offsetMin = new Vector2(10, 5); taRT.offsetMax = new Vector2(-10, -5);
+                
+                // Placeholder
+                Transform existingPlaceholder = inputMsgObj.Find("Txt_Placeholder");
+                TMPro.TextMeshProUGUI placeholderTMP = null;
+                if (existingPlaceholder != null)
+                {
+                    // Convert Text to TMP if needed
+                    Text legacyText = existingPlaceholder.GetComponent<Text>();
+                    if (legacyText != null)
+                    {
+                        string phText = legacyText.text;
+                        DestroyImmediate(legacyText);
+                        placeholderTMP = existingPlaceholder.gameObject.AddComponent<TMPro.TextMeshProUGUI>();
+                        placeholderTMP.text = phText;
+                        placeholderTMP.fontSize = 28;
+                        placeholderTMP.color = new Color(1, 1, 1, 0.5f);
+                        placeholderTMP.alignment = TMPro.TextAlignmentOptions.MidlineLeft;
+                        existingPlaceholder.SetParent(textArea.transform, false);
+                        RectTransform phRT = existingPlaceholder.GetComponent<RectTransform>();
+                        phRT.anchorMin = Vector2.zero; phRT.anchorMax = Vector2.one;
+                        phRT.offsetMin = Vector2.zero; phRT.offsetMax = Vector2.zero;
+                    }
+                }
+                
+                // Text Component (for actual input)
+                GameObject textCompObj = new GameObject("Text");
+                textCompObj.transform.SetParent(textArea.transform, false);
+                TMPro.TextMeshProUGUI textComp = textCompObj.AddComponent<TMPro.TextMeshProUGUI>();
+                textComp.fontSize = 28;
+                textComp.color = Color.white;
+                textComp.alignment = TMPro.TextAlignmentOptions.MidlineLeft;
+                RectTransform tcRT = textCompObj.GetComponent<RectTransform>();
+                tcRT.anchorMin = Vector2.zero; tcRT.anchorMax = Vector2.one;
+                tcRT.offsetMin = Vector2.zero; tcRT.offsetMax = Vector2.zero;
+                
+                tmpInput.textViewport = taRT;
+                tmpInput.textComponent = textComp;
+                if (placeholderTMP != null) tmpInput.placeholder = placeholderTMP;
+            }
+            
+            // Assign to ChatUI via SerializedObject
+            SetPrivateField(chatUI, "_input_Chat", tmpInput);
+        }
+        
+        // Send Button
+        Button sendBtn = bottomInput?.Find("Btn_Send_b90")?.GetComponent<Button>();
+        if (sendBtn != null)
+        {
+            SetPrivateField(chatUI, "_btn_Send", sendBtn);
+        }
+        
+        // ScrollRect and Content
+        ScrollRect scrollRect = chatContent?.GetComponent<ScrollRect>();
+        if (scrollRect != null)
+        {
+            SetPrivateField(chatUI, "_scroll_Rect", scrollRect);
+            SetPrivateField(chatUI, "_scroll_MessageList_Content", scrollRect.content);
+        }
+        
+        // Message Prefab
+        SetPrivateField(chatUI, "_prefab_ChatMessageItem", msgPrefab);
+        
+        // Attach ChatPresenter
+        UI.Chat.ChatPresenter chatPresenter = canvasObj.AddComponent<UI.Chat.ChatPresenter>();
+        SetPrivateField(chatPresenter, "_chatUI", chatUI);
+        
+        Debug.Log("ChatUI and ChatPresenter components attached and wired.");
+    }
+    
+    private static void SetPrivateField(object obj, string fieldName, object value)
+    {
+        var field = obj.GetType().GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        if (field != null)
+        {
+            field.SetValue(obj, value);
+        }
+        else
+        {
+            Debug.LogWarning($"Field {fieldName} not found on {obj.GetType().Name}");
+        }
     }
 
     private static void CreateDimmer(Transform parent)

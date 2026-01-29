@@ -38,16 +38,38 @@ namespace UI.Chat
         {
             if (string.IsNullOrWhiteSpace(message)) return;
 
-            // TODO: 현재 채널 이름을 관리하는 로직이 필요함. 일단 하드코딩.
-            string currentChannel = "GlobalChat"; 
-
+            // Check if VivoxManager is available
             if (VivoxManager.Instance != null)
             {
-                await VivoxManager.Instance.SendChannelMessageAsync(currentChannel, message);
-                // 내가 보낸 메시지는 Vivox 이벤트로 다시 들어오므로 여기서 UI 추가할 필요 없음 (Vivox 동작 방식에 따라 다름)
-                // 만약 에코가 안 온다면 여기서 AddMessage 호출 필요. 보통은 온다.
-                _chatUI.ClearInput();
+                // Online Mode: Send via Vivox
+                string currentChannel = "GlobalChat"; // TODO: Dynamic channel
+                try
+                {
+                    await VivoxManager.Instance.SendChannelMessageAsync(currentChannel, message);
+                    _chatUI.ClearInput();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogWarning($"Vivox send failed, falling back to local: {e.Message}");
+                    // Fallback to local
+                    HandleLocalSend(message);
+                }
             }
+            else
+            {
+                // Offline/Local Mode: Display message locally
+                Debug.Log("ChatPresenter: VivoxManager not available. Using local mode.");
+                HandleLocalSend(message);
+            }
+        }
+
+        private void HandleLocalSend(string message)
+        {
+            // Local mode: Display the message immediately
+            string playerName = "Player"; // TODO: Get from GameData or Settings
+            ChatData localData = new ChatData(playerName, message);
+            _chatUI.AddMessage(localData);
+            _chatUI.ClearInput();
         }
 
         private void HandleMessageReceived(string sender, string message)
