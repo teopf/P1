@@ -15,6 +15,7 @@ public class HUDController : MonoBehaviour
         { "a1", "SubMenu_Canvas" },
         { "a2", "Canvas_A2_Inventory" },
         { "a3", "Canvas_a3_Growth" },  // Growth Menu
+        { "a6", "Canvas_a6_Shop" },    // Shop Menu
         { "Chat", "Canvas_ChatOverlay" } // Maps "Chat" button to Overlay
     };
 
