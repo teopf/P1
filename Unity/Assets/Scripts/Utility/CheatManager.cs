@@ -3,6 +3,8 @@ using Game.Core;
 using Game.AI;
 using Game.Data;
 using System.Linq;
+using Backend;
+using BigInteger = System.Numerics.BigInteger;
 
 namespace Game.Utility
 {
@@ -103,6 +105,19 @@ namespace Game.Utility
             {
                 UseAction(2);
             }
+            // UserData 치트 키
+            if (keyboard.f7Key.wasPressedThisFrame)
+            {
+                CheatAddGold();
+            }
+            if (keyboard.f8Key.wasPressedThisFrame)
+            {
+                CheatAddGem();
+            }
+            if (keyboard.f9Key.wasPressedThisFrame)
+            {
+                CheatAddExp();
+            }
 #else
             // Legacy Input 사용
             if (Input.GetKeyDown(KeyCode.F5))  // F1 → F5로 변경
@@ -126,6 +141,19 @@ namespace Game.Utility
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 UseAction(2);
+            }
+            // UserData 치트 키
+            if (Input.GetKeyDown(KeyCode.F7))
+            {
+                CheatAddGold();
+            }
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                CheatAddGem();
+            }
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                CheatAddExp();
             }
 #endif
         }
@@ -329,6 +357,95 @@ namespace Game.Utility
             prefab.transform.position = new Vector3(0, -1000, 0);
             DontDestroyOnLoad(prefab);
             return prefab;
+        }
+
+        // ============================================
+        // UserData 치트 메서드
+        // ============================================
+
+        /// <summary>
+        /// 치트: 골드 추가 (F7)
+        /// </summary>
+        [ContextMenu("Cheat: Add 10000 Gold")]
+        private void CheatAddGold()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogWarning("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            BigInteger amount = new BigInteger(10000);
+            PlayerDataManager.Instance.AddGold(amount);
+            Debug.Log($"[CheatManager] 골드 {amount} 추가됨!");
+        }
+
+        /// <summary>
+        /// 치트: 젬 추가 (F8)
+        /// </summary>
+        [ContextMenu("Cheat: Add 100 Gem")]
+        private void CheatAddGem()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogWarning("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            int amount = 100;
+            PlayerDataManager.Instance.AddGem(amount);
+            Debug.Log($"[CheatManager] 젬 {amount} 추가됨!");
+        }
+
+        /// <summary>
+        /// 치트: 경험치 추가 (F9)
+        /// </summary>
+        [ContextMenu("Cheat: Add 500 Exp")]
+        private void CheatAddExp()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogWarning("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            int amount = 500;
+            PlayerDataManager.Instance.AddExp(amount);
+            Debug.Log($"[CheatManager] 경험치 {amount} 추가됨!");
+        }
+
+        /// <summary>
+        /// 치트: 레벨 설정
+        /// </summary>
+        [ContextMenu("Cheat: Set Level 10")]
+        private void CheatSetLevel()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogWarning("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            int level = 10;
+            PlayerDataManager.Instance.SetLevel(level);
+            Debug.Log($"[CheatManager] 레벨 {level}로 설정됨!");
+        }
+
+        /// <summary>
+        /// 치트: 엄청난 골드 추가 (테스트용)
+        /// </summary>
+        [ContextMenu("Cheat: Add 1 Billion Gold")]
+        private void CheatAddHugeGold()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogWarning("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            BigInteger amount = new BigInteger(1000000000);
+            PlayerDataManager.Instance.AddGold(amount);
+            Debug.Log($"[CheatManager] 골드 {amount} (1B) 추가됨!");
         }
     }
 }
