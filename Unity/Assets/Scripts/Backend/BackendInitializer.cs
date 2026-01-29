@@ -24,12 +24,21 @@ namespace Backend
             {
                 // BackendManager 초기화
                 await BackendManager.Instance.InitializeAsync();
-                
+
                 string playerId = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
-                statusMessage = $"✅ UGS 초기화 성공!\nPlayer ID: {playerId}";
-                
                 Debug.Log("✅ UGS 초기화 성공!");
                 Debug.Log($"로그인된 Player ID: {playerId}");
+
+                // PlayerDataManager 데이터 로드
+                if (PlayerDataManager.Instance != null)
+                {
+                    await PlayerDataManager.Instance.InitializeData();
+                    statusMessage = $"✅ UGS 초기화 성공!\nPlayer ID: {playerId}\n데이터 로드 완료";
+                }
+                else
+                {
+                    statusMessage = $"✅ UGS 초기화 성공!\nPlayer ID: {playerId}";
+                }
             }
             catch (System.Exception e)
             {
@@ -46,12 +55,22 @@ namespace Backend
         {
             statusMessage = "수동 초기화 시작...";
             Debug.Log("수동 초기화 시작...");
-            try 
+            try
             {
                 await BackendManager.Instance.InitializeAsync();
                 string playerId = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
-                statusMessage = $"✅ 수동 초기화 성공!\nPlayer ID: {playerId}";
                 Debug.Log("수동 초기화 완료!");
+
+                // PlayerDataManager 데이터 로드
+                if (PlayerDataManager.Instance != null)
+                {
+                    await PlayerDataManager.Instance.InitializeData();
+                    statusMessage = $"✅ 수동 초기화 성공!\nPlayer ID: {playerId}\n데이터 로드 완료";
+                }
+                else
+                {
+                    statusMessage = $"✅ 수동 초기화 성공!\nPlayer ID: {playerId}";
+                }
             }
             catch(System.Exception e)
             {

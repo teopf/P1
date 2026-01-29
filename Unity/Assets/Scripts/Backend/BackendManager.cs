@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.CloudCode;
+using Unity.Services.CloudSave;
 using UnityEngine;
 
 namespace Backend
@@ -108,6 +109,85 @@ namespace Backend
             catch (Exception e)
             {
                 Debug.LogError($"Unknown Error calling {functionName}: {e.Message}");
+                throw;
+            }
+        }
+
+        // ============================================
+        // CLOUD SAVE METHODS
+        // ============================================
+
+        /// <summary>
+        /// Cloud Save에 데이터를 저장합니다.
+        /// </summary>
+        /// <param name="key">저장할 키</param>
+        /// <param name="data">저장할 데이터 (JSON으로 직렬화 가능한 객체)</param>
+        public async Task SaveDataToCloud(string key, object data)
+        {
+            try
+            {
+                var dataToSave = new Dictionary<string, object>
+                {
+                    { key, data }
+                };
+
+                await CloudSaveService.Instance.Data.Player.SaveAsync(dataToSave);
+                Debug.Log($"BackendManager: Cloud Save 성공 (Key: {key})");
+            }
+            catch (CloudSaveException e)
+            {
+                Debug.LogError($"BackendManager: Cloud Save 실패 (Key: {key}): {e.Message}");
+                throw;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"BackendManager: Cloud Save 알 수 없는 오류 (Key: {key}): {e.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Cloud Save에서 데이터를 불러옵니다.
+        /// </summary>
+        /// <typeparam name="T">반환할 데이터 타입</typeparam>
+        /// <param name="key">불러올 키</param>
+        /// <returns>불러온 데이터, 데이터가 없으면 default(T)</returns>
+        public async Task<T> LoadDataFromCloud<T>(string key)
+        {
+            try
+            {
+                var keysToLoad = new HashSet<string> { key };
+                var results = await CloudSaveService.Instance.Data.Player.LoadAsync(keysToLoad);
+
+                if (results.TryGetValue(key, out var item))
+                {
+                    // GetAsString()을 사용하여 JSON 문자열로 가져옵니다
+                    string jsonData = item.Value.GetAsString();
+                    Debug.Log($"BackendManager: Cloud Load 성공 (Key: {key})");
+
+                    // T가 string인 경우 직접 반환
+                    if (typeof(T) == typeof(string))
+                    {
+                        return (T)(object)jsonData;
+                    }
+
+                    // 그 외의 경우 JSON으로 역직렬화 필요 (상위 레이어에서 처리)
+                    return (T)(object)jsonData;
+                }
+                else
+                {
+                    Debug.Log($"BackendManager: Cloud에 데이터 없음 (Key: {key})");
+                    return default(T);
+                }
+            }
+            catch (CloudSaveException e)
+            {
+                Debug.LogError($"BackendManager: Cloud Load 실패 (Key: {key}): {e.Message}");
+                throw;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"BackendManager: Cloud Load 알 수 없는 오류 (Key: {key}): {e.Message}");
                 throw;
             }
         }

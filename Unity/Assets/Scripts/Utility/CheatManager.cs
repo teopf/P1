@@ -447,5 +447,73 @@ namespace Game.Utility
             PlayerDataManager.Instance.AddGold(amount);
             Debug.Log($"[CheatManager] 골드 {amount} (1B) 추가됨!");
         }
+
+        // ============================================
+        // CLOUD SAVE 테스트 메서드
+        // ============================================
+
+        /// <summary>
+        /// 테스트: 클라우드에 강제 저장
+        /// </summary>
+        [ContextMenu("Test: Save to Cloud")]
+        private async void TestSaveToCloud()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogError("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            Debug.Log("=== 클라우드 저장 테스트 시작 ===");
+            bool success = await PlayerDataManager.Instance.SaveToCloud();
+
+            if (success)
+            {
+                Debug.Log("✅ 클라우드 저장 테스트 성공!");
+            }
+            else
+            {
+                Debug.LogError("❌ 클라우드 저장 테스트 실패!");
+            }
+        }
+
+        /// <summary>
+        /// 테스트: 클라우드에서 강제 로드
+        /// </summary>
+        [ContextMenu("Test: Load from Cloud")]
+        private async void TestLoadFromCloud()
+        {
+            if (PlayerDataManager.Instance == null)
+            {
+                Debug.LogError("[CheatManager] PlayerDataManager가 없습니다!");
+                return;
+            }
+
+            Debug.Log("=== 클라우드 로드 테스트 시작 ===");
+            await PlayerDataManager.Instance.InitializeData();
+            Debug.Log($"✅ 클라우드 로드 완료: {PlayerDataManager.Instance.CurrentData}");
+        }
+
+        /// <summary>
+        /// 테스트: 로컬 백업 삭제 (재테스트용)
+        /// </summary>
+        [ContextMenu("Test: Clear Local Backup")]
+        private void TestClearLocalBackup()
+        {
+            const string LOCAL_BACKUP_KEY = "UserData_Backup";
+            const string LOCAL_TIMESTAMP_KEY = "UserData_Timestamp";
+
+            if (PlayerPrefs.HasKey(LOCAL_BACKUP_KEY))
+            {
+                PlayerPrefs.DeleteKey(LOCAL_BACKUP_KEY);
+                PlayerPrefs.DeleteKey(LOCAL_TIMESTAMP_KEY);
+                PlayerPrefs.Save();
+                Debug.Log("✅ 로컬 백업 삭제 완료 (재테스트용)");
+            }
+            else
+            {
+                Debug.Log("로컬 백업이 없습니다.");
+            }
+        }
     }
 }
