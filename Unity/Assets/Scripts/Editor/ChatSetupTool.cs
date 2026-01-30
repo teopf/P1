@@ -164,7 +164,7 @@ namespace EditorTools
             placeholderText.text = "Enter message...";
             placeholderText.color = new Color(0.2f, 0.2f, 0.2f, 0.5f);
             placeholderText.fontStyle = FontStyles.Italic;
-            placeholderText.enableWordWrapping = false;
+            placeholderText.textWrappingMode = TextWrappingModes.NoWrap;
             RectTransform placeholderRect = placeholderObj.GetComponent<RectTransform>();
             placeholderRect.anchorMin = Vector2.zero;
             placeholderRect.anchorMax = Vector2.one;
@@ -173,7 +173,7 @@ namespace EditorTools
             textComponentObj.transform.SetParent(inputTextObj.transform, false);
             TextMeshProUGUI inputText = textComponentObj.GetComponent<TextMeshProUGUI>();
             inputText.color = Color.black;
-            inputText.enableWordWrapping = false;
+            inputText.textWrappingMode = TextWrappingModes.NoWrap;
             RectTransform textComponentRect = textComponentObj.GetComponent<RectTransform>();
             textComponentRect.anchorMin = Vector2.zero;
             textComponentRect.anchorMax = Vector2.one;
@@ -231,7 +231,7 @@ namespace EditorTools
             protoText.text = "<b>Name</b>: Message Content";
             protoText.fontSize = 28;
             protoText.color = Color.white;
-            protoText.enableWordWrapping = true;
+            protoText.textWrappingMode = TextWrappingModes.Normal;
             protoText.alignment = TextAlignmentOptions.Left;
             
             // Add ContentSizeFitter to prototype so it calculates its own height based on text content
