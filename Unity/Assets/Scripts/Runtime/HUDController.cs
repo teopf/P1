@@ -16,6 +16,7 @@ public class HUDController : MonoBehaviour
         { "a2", "Canvas_A2_Inventory" },
         { "a3", "Canvas_a3_Growth" },  // Growth Menu
         { "a6", "Canvas_a6_Shop" },    // Shop Menu
+        { "HeroDetail", "Canvas_HeroDetailPopup" }, // Hero Detail Popup
         { "Chat", "Canvas_ChatOverlay" } // Maps "Chat" button to Overlay
     };
 
@@ -99,7 +100,70 @@ public class HUDController : MonoBehaviour
                     
                     Debug.Log($"HUDController: Wired 'Close' logic to {btn.name} in {canvas.name}");
                 }
+                
+                // Hero Detail Popup: Dimmer background click handler
+                if (btn.name == "Dimmer_Background" && canvas.name == "Canvas_HeroDetailPopup")
+                {
+                    btn.onClick.AddListener(() => 
+                    {
+                        Debug.Log("Hero Detail: Dimmer clicked, returning to a1 menu");
+                        canvas.gameObject.SetActive(false);
+                    });
+                }
+                
+                // Hero Detail Popup: a99 acts as back button
+                if (btn.name == "a99" && canvas.name == "Canvas_HeroDetailPopup")
+                {
+                    btn.onClick.AddListener(() =>
+                    {
+                        Debug.Log("Hero Detail: a99 back button clicked, returning to a1 menu");
+                        StartCoroutine(AnimateButtonPunch(btn.transform));
+                        canvas.gameObject.SetActive(false);
+                    });
+                }
             }
+        }
+        
+        // Register Hero Item Click Handlers (D121-D150 etc.)
+        RegisterHeroItemClickHandlers();
+    }
+    
+    private void RegisterHeroItemClickHandlers()
+    {
+        // Find SubMenu_Canvas (a1 menu)
+        var subMenuCanvas = FindInactiveObject("SubMenu_Canvas");
+        if (subMenuCanvas == null) return;
+        
+        var heroButtons = subMenuCanvas.GetComponentsInChildren<Button>(true);
+        foreach (var btn in heroButtons)
+        {
+            // Hero items are named D121, D122, ... D150 etc.
+            if (btn.name.StartsWith("D") && btn.name.Length >= 4)
+            {
+                string numPart = btn.name.Substring(1);
+                if (int.TryParse(numPart, out int heroId) && heroId >= 121)
+                {
+                    btn.onClick.AddListener(() => OnHeroItemClicked(heroId));
+                    Debug.Log($"HUDController: Registered hero click handler for {btn.name}");
+                }
+            }
+        }
+    }
+    
+    private void OnHeroItemClicked(int heroId)
+    {
+        Debug.Log($"HUDController: Hero item D{heroId} clicked, opening detail popup");
+        
+        // Open Hero Detail Popup
+        var heroDetailCanvas = FindInactiveObject("Canvas_HeroDetailPopup");
+        if (heroDetailCanvas != null)
+        {
+            heroDetailCanvas.SetActive(true);
+            // TODO: Pass heroId to populate hero data in the popup
+        }
+        else
+        {
+            Debug.LogWarning("Canvas_HeroDetailPopup not found. Run Tools > Generate Hero Detail Popup first.");
         }
     }
 
