@@ -4,7 +4,7 @@ using System.Text;
 
 public class UIPositionDumper : EditorWindow
 {
-    [MenuItem("Tools/Dump a3 Growth Menu Positions")]
+    [MenuItem("Tools/UI/Dump a3 Growth Menu Positions")]
     public static void DumpPositions()
     {
         // Find including inactive objects

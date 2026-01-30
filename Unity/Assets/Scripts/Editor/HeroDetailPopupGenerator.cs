@@ -80,7 +80,7 @@ public class HeroDetailPopupGenerator : EditorWindow
     private const float AB1_Y = 0f;  // Bottom anchored
     private const float AB1_HEIGHT = 170f;
 
-    [MenuItem("Tools/Generate Hero Detail Popup")]
+    [MenuItem("Tools/UI/Generate Hero Detail Popup")]
     public static void Generate()
     {
         string canvasName = "Canvas_HeroDetailPopup";

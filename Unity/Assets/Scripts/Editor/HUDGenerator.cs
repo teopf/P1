@@ -18,7 +18,7 @@ public class HUDGenerator : EditorWindow
     private static readonly Color COLOR_BTN_BEIGE_TOP = new Color32(255, 228, 196, 217); // #FFE4C4
     private static readonly Color COLOR_BTN_BEIGE_BOTTOM = new Color32(245, 222, 179, 217); // #F5DEB3
 
-    [MenuItem("Tools/Generate HUD Layout")]
+    [MenuItem("Tools/UI/Generate HUD Layout")]
     public static void Generate()
     {
         // 1. Setup Canvas

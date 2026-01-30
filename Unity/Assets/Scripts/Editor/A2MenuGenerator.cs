@@ -19,7 +19,7 @@ public class A2MenuGenerator : EditorWindow
     // Items
     private static readonly Color COLOR_ITEM_BG = new Color32(255, 0, 0, 64);           // Red/Salmon (25%)
 
-    [MenuItem("Tools/Generate A2 Inventory Menu")]
+    [MenuItem("Tools/UI/Generate A2 Inventory Menu")]
     public static void Generate()
     {
         string canvasName = "Canvas_A2_Inventory";

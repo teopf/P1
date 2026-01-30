@@ -20,7 +20,7 @@ public class HUDUserDataDisplaySetup : EditorWindow
     private static readonly Color COLOR_GREEN = new Color32(76, 175, 80, 255); // #4CAF50
     private static readonly Color COLOR_BLACK_TRANSPARENT = new Color(0, 0, 0, 0.8f); // 80% Alpha
 
-    [MenuItem("Tools/Setup HUD User Data Display")]
+    [MenuItem("Tools/UI/Setup HUD User Data Display")]
     public static void SetupHUDUserDataDisplay()
     {
         // 1. HUD_Canvas와 AA1_TopPanel 찾기

@@ -5,7 +5,7 @@ using System.Text;
 
 public class UIDataDumper : EditorWindow
 {
-    [MenuItem("Tools/Dump UI Data")]
+    [MenuItem("Tools/UI/Dump UI Data")]
     public static void Dump()
     {
         StringBuilder sb = new StringBuilder();

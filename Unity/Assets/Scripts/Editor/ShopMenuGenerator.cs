@@ -48,7 +48,7 @@ public class ShopMenuGenerator : EditorWindow
     private static readonly float[] TOGGLE_X = { 17f, 227f, 438f, 648f, 859f };
     private static readonly float[] TOGGLE_W = { 210f, 211f, 210f, 211f, 210f };
 
-    [MenuItem("Tools/Generate a6 Shop Menu")]
+    [MenuItem("Tools/UI/Generate a6 Shop Menu")]
     public static void Generate()
     {
         string canvasName = "Canvas_a6_Shop";

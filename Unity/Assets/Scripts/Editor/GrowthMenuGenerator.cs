@@ -44,7 +44,7 @@ public class GrowthMenuGenerator : EditorWindow
     private static readonly float[] TOGGLE_X = { 17f, 278f, 542f, 804f };
     private static readonly float[] TOGGLE_W = { 261f, 262f, 262f, 261f };
 
-    [MenuItem("Tools/Generate a3 Growth Menu")]
+    [MenuItem("Tools/UI/Generate a3 Growth Menu")]
     public static void Generate()
     {
         string canvasName = "Canvas_a3_Growth";

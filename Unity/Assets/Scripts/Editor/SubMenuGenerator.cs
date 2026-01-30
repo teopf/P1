@@ -21,7 +21,7 @@ public class SubMenuGenerator : EditorWindow
     private static readonly Color COLOR_BTN_HUD_ACTIVE = new Color32(255, 179, 232, 255); // Active Pink
     private static readonly Color COLOR_BTN_HUD = new Color32(232, 180, 232, 217);        // Normal Pink
 
-    [MenuItem("Tools/Generate Sub-Menu Layout")]
+    [MenuItem("Tools/UI/Generate Sub-Menu Layout")]
     public static void Generate()
     {
         string canvasName = "SubMenu_Canvas";

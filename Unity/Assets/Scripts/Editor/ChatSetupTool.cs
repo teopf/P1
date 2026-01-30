@@ -9,7 +9,7 @@ namespace EditorTools
 {
     public class ChatSetupTool : EditorWindow
     {
-        [MenuItem("Tools/Setup Chat UI")]
+        [MenuItem("Tools/UI/Setup Chat UI")]
         public static void SetupChatUI()
         {
             // 1. HUD_Canvas 찾기

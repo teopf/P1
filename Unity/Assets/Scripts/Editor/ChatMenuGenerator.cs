@@ -21,7 +21,7 @@ public class ChatMenuGenerator : EditorWindow
     private const int WINDOW_H = 1093; // 90(Top) + 90(Tab) + 813(Content) + 90(Input) + spacing? 
     // Spec says Top Offset 81px. Left 193px.
     
-    [MenuItem("Tools/Generate Chat Overlay")]
+    [MenuItem("Tools/UI/Generate Chat Overlay")]
     public static void Generate()
     {
         string canvasName = "Canvas_ChatOverlay";
