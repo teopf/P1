@@ -110,3 +110,8 @@ InitTestScene*.unity*
 # ParrelSync
 Unity_clone_0/
 unity_clone_0/
+
+# Android Keystore
+*.keystore
+*.jks
+*.user
