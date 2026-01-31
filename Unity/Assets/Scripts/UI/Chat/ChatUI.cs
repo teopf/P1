@@ -4,10 +4,11 @@ using TMPro;
 using System;
 using Data;
 using System.Collections.Generic;
+using UI.Core;
 
 namespace UI.Chat
 {
-    public class ChatUI : MonoBehaviour
+    public class ChatUI : UIBase
     {
         [Header("Atoms")]
         [SerializeField] private TMP_InputField _input_Chat;
@@ -27,8 +28,10 @@ namespace UI.Chat
         // Presenter에게 알릴 이벤트
         public event Action<string> OnSendButtonClicked;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             // 리스너 등록
             if (_btn_Send != null)
             {
@@ -112,7 +115,7 @@ namespace UI.Chat
                 if (_chatFont != null)
                 {
                     textComponent.font = _chatFont;
-                    Debug.Log($"[ChatUI] Font applied: {_chatFont.name}");
+                    // Debug.Log($"[ChatUI] Font applied: {_chatFont.name}"); // 로그 과도 스팸 방지
                 }
                 else
                 {
@@ -134,8 +137,6 @@ namespace UI.Chat
                 
                 textComponent.textWrappingMode = TMPro.TextWrappingModes.Normal;
                 textComponent.ForceMeshUpdate(); // 즉시 업데이트
-                
-                Debug.Log($"[ChatUI] Message added: {chatData.SenderName}: {chatData.MessageContent}");
             }
             else
             {
@@ -150,7 +151,10 @@ namespace UI.Chat
 
         public void ToggleChatWindow()
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            if (gameObject.activeSelf)
+                Hide();
+            else
+                Show();
         }
     }
 }

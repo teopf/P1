@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Backend;
 using System.Numerics;
 using TMPro;
+using UI.Core;
 
 namespace UI
 {
@@ -10,7 +11,7 @@ namespace UI
     /// HUD에 UserData 정보를 표시하는 컴포넌트
     /// - 골드, 젬, ID, 레벨, 경험치 바
     /// </summary>
-    public class HUDUserDataDisplay : MonoBehaviour
+    public class HUDUserDataDisplay : UIBase
     {
         [Header("통화 표시 (Currency)")]
         [SerializeField] private TextMeshProUGUI goldText;      // B17에 할당
@@ -34,8 +35,9 @@ namespace UI
         [Header("대용량 숫자 표시 (BigInteger)")]
         [SerializeField] private bool useShortFormat = true;     // true: 1.2K, 1.5M 형식
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             // PlayerDataManager 이벤트 구독
             if (PlayerDataManager.Instance != null)
             {
@@ -54,8 +56,9 @@ namespace UI
             }
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             // 이벤트 구독 해제
             if (PlayerDataManager.Instance != null)
             {
@@ -66,6 +69,15 @@ namespace UI
                 PlayerDataManager.Instance.OnExpChanged -= UpdateExp;
             }
         }
+
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            if (goldText == null) Debug.LogWarning($"{name}: Gold Text is not assigned.");
+            if (gemText == null) Debug.LogWarning($"{name}: Gem Text is not assigned.");
+        }
+#endif
 
         /// <summary>
         /// 모든 UI 요소를 한 번에 업데이트
@@ -155,6 +167,29 @@ namespace UI
         /// </summary>
         private string FormatBigInteger(BigInteger value)
         {
+            if (value < 1000) return value.ToString();
+            
+            // 단순화된 로직, 필요시 별도 유틸리티로 분리 가능
+            string[] suffixes = { "K", "M", "B", "T", "aa", "ab", "ac" };
+            int suffixIndex = 0;
+            double dValue = (double)value;
+
+            while (dValue >= 1000.0 && suffixIndex < suffixes.Length)
+            {
+                dValue /= 1000.0;
+                suffixIndex++;
+            }
+
+            // suffixIndex가 배열 범위를 넘어가는 경우 처리 (K, M, B, T 이후는 그냥 지수표기 등 고려)
+            if (suffixIndex > 0 && suffixIndex <= suffixes.Length)
+            {
+                // 인덱스 보정 (Loop 1회 -> K (idx 0), Loop 2회 -> M (idx 1))
+                return dValue.ToString("0.#") + suffixes[suffixIndex - 1];
+            }
+            
+            return value.ToString("N0"); // 범위 초과시 전체 출력
+            
+            /* 기존 로직 유지 (안전성 위해) - 위 로직이 더 일반적이지만 기존 로직 존중
             if (value < 1000)
             {
                 return value.ToString();
@@ -179,6 +214,7 @@ namespace UI
                 double t = (double)value / 1000000000000.0;
                 return t.ToString("0.#") + "T";
             }
+            */
         }
 
         // ============================================

@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UI.Core;
 
-public class HUDController : MonoBehaviour
+public class HUDController : UIBase
 {
     // Dictionary to manage multiple sub-menus: "a1" -> CanvasObj
     private Dictionary<string, GameObject> subMenus = new Dictionary<string, GameObject>();
@@ -21,11 +22,34 @@ public class HUDController : MonoBehaviour
         { "Chat", "Canvas_ChatOverlay" } // Maps "Chat" button to Overlay
     };
 
-    private void Awake()
+    [Header("Optimization: Pre-assign Menus")]
+    [SerializeField] private List<GameObject> preAssignedMenuObjects;
+
+    protected override void Awake()
     {
+       base.Awake();
+
+        // 0. Build cache from pre-assigned objects
+        if (preAssignedMenuObjects != null)
+        {
+            foreach (var menu in preAssignedMenuObjects)
+            {
+                if (menu != null)
+                {
+                    // Reverse lookup or just add to cache if name matches
+                    if (!subMenus.ContainsKey(menu.name))
+                    {
+                        subMenus[menu.name] = menu; // Store by direct name too
+                    }
+                }
+            }
+        }
+
         // 1. Register known sub-menus from map
         foreach (var kvp in buttonToCanvasMap)
         {
+            if (subMenus.ContainsKey(kvp.Value)) continue; // Already assigned manually
+
             var canvasObj = FindInactiveObject(kvp.Value);
             if (canvasObj != null)
             {
@@ -140,7 +164,10 @@ public class HUDController : MonoBehaviour
     private void RegisterHeroItemClickHandlers()
     {
         // Find SubMenu_Canvas (a1 menu)
-        var subMenuCanvas = FindInactiveObject("SubMenu_Canvas");
+        GameObject subMenuCanvas = null;
+        if (subMenus.ContainsKey("a1")) subMenuCanvas = subMenus["a1"];
+        if (subMenuCanvas == null) subMenuCanvas = FindInactiveObject("SubMenu_Canvas");
+
         if (subMenuCanvas == null) return;
         
         var heroButtons = subMenuCanvas.GetComponentsInChildren<Button>(true);
@@ -164,7 +191,10 @@ public class HUDController : MonoBehaviour
         Debug.Log($"HUDController: Hero item D{heroId} clicked, opening detail popup");
         
         // Open Hero Detail Popup
-        var heroDetailCanvas = FindInactiveObject("Canvas_HeroDetailPopup");
+        GameObject heroDetailCanvas = null;
+        if (subMenus.ContainsKey("HeroDetail")) heroDetailCanvas = subMenus["HeroDetail"];
+        if (heroDetailCanvas == null) heroDetailCanvas = FindInactiveObject("Canvas_HeroDetailPopup");
+
         if (heroDetailCanvas != null)
         {
             heroDetailCanvas.SetActive(true);
@@ -285,7 +315,14 @@ public class HUDController : MonoBehaviour
 
     private GameObject FindInactiveObject(string name)
     {
-        // Optimized find for scene objects only
+        // 1. Check pre-assigned list first
+        if (preAssignedMenuObjects != null)
+        {
+            var found = preAssignedMenuObjects.FirstOrDefault(x => x.name == name);
+            if (found != null) return found;
+        }
+
+        // 2. Optimized find for scene objects only
         Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
         foreach (var t in objs)
         {
@@ -301,7 +338,7 @@ public class HUDController : MonoBehaviour
     {
         float duration = 0.15f;
         float elapsed = 0f;
-        Vector3 originalScale = Vector3.one; 
+         Vector3 originalScale = Vector3.one; 
         
         // Scale down
         while (elapsed < duration)
