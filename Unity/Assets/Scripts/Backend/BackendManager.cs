@@ -13,6 +13,33 @@ namespace Backend
     {
         public static BackendManager Instance { get; private set; }
 
+        // ============================================
+        // 백엔드 상태 알림 이벤트
+        // ============================================
+
+        /// <summary>로드 시작 시 호출</summary>
+        public event Action OnLoadStart;
+        /// <summary>로드 완료 시 호출 (성공 여부 전달)</summary>
+        public event Action<bool> OnLoadComplete;
+
+        /// <summary>저장 시작 시 호출</summary>
+        public event Action OnSaveStart;
+        /// <summary>저장 완료 시 호출 (성공 여부 전달)</summary>
+        public event Action<bool> OnSaveComplete;
+
+        /// <summary>게임 초기화(UGS + 인증 + Vivox) 시작 시 호출</summary>
+        public event Action OnInitStart;
+        /// <summary>게임 초기화 완료 시 호출 (성공 여부 전달)</summary>
+        public event Action<bool> OnInitComplete;
+
+        /// <summary>초기화(삭제) 시작 시 호출</summary>
+        public event Action OnResetStart;
+        /// <summary>초기화(삭제) 완료 시 호출 (성공 여부 전달)</summary>
+        public event Action<bool> OnResetComplete;
+
+        /// <summary>현재 초기화 진행 중인지 여부</summary>
+        public bool IsInitializing { get; private set; }
+
         private void Awake()
         {
             if (Instance == null)
@@ -28,6 +55,8 @@ namespace Backend
 
         public async Task InitializeAsync()
         {
+            IsInitializing = true;
+            OnInitStart?.Invoke();
             try
             {
                 await UnityServices.InitializeAsync();
@@ -71,12 +100,17 @@ namespace Backend
                 {
                     Debug.LogError("BackendManager: VivoxManager Instance is still null after creation attempt!");
                 }
+
+                IsInitializing = false;
+                OnInitComplete?.Invoke(true);
             }
             catch (AuthenticationException ex)
             {
                 // Compare error code to AuthenticationErrorCodes
                 // Notify the player with the proper error message
                 Debug.LogException(ex);
+                IsInitializing = false;
+                OnInitComplete?.Invoke(false);
                 throw;
             }
             catch (RequestFailedException ex)
@@ -84,11 +118,15 @@ namespace Backend
                 // Compare error code to CommonErrorCodes
                 // Notify the player with the proper error message
                 Debug.LogException(ex);
+                IsInitializing = false;
+                OnInitComplete?.Invoke(false);
                 throw;
             }
             catch (Exception e)
             {
                 Debug.LogError($"BackendManager Initializaion Failed: {e.Message}");
+                IsInitializing = false;
+                OnInitComplete?.Invoke(false);
                 throw;
             }
         }
@@ -124,6 +162,7 @@ namespace Backend
         /// <param name="data">저장할 데이터 (JSON으로 직렬화 가능한 객체)</param>
         public async Task SaveDataToCloud(string key, object data)
         {
+            OnSaveStart?.Invoke();
             try
             {
                 var dataToSave = new Dictionary<string, object>
@@ -133,15 +172,18 @@ namespace Backend
 
                 await CloudSaveService.Instance.Data.Player.SaveAsync(dataToSave);
                 Debug.Log($"BackendManager: Cloud Save 성공 (Key: {key})");
+                OnSaveComplete?.Invoke(true);
             }
             catch (CloudSaveException e)
             {
                 Debug.LogError($"BackendManager: Cloud Save 실패 (Key: {key}): {e.Message}");
+                OnSaveComplete?.Invoke(false);
                 throw;
             }
             catch (Exception e)
             {
                 Debug.LogError($"BackendManager: Cloud Save 알 수 없는 오류 (Key: {key}): {e.Message}");
+                OnSaveComplete?.Invoke(false);
                 throw;
             }
         }
@@ -154,6 +196,7 @@ namespace Backend
         /// <returns>불러온 데이터, 데이터가 없으면 default(T)</returns>
         public async Task<T> LoadDataFromCloud<T>(string key)
         {
+            OnLoadStart?.Invoke();
             try
             {
                 var keysToLoad = new HashSet<string> { key };
@@ -168,26 +211,31 @@ namespace Backend
                     // T가 string인 경우 직접 반환
                     if (typeof(T) == typeof(string))
                     {
+                        OnLoadComplete?.Invoke(true);
                         return (T)(object)jsonData;
                     }
 
                     // 그 외의 경우 JSON으로 역직렬화 필요 (상위 레이어에서 처리)
+                    OnLoadComplete?.Invoke(true);
                     return (T)(object)jsonData;
                 }
                 else
                 {
                     Debug.Log($"BackendManager: Cloud에 데이터 없음 (Key: {key})");
+                    OnLoadComplete?.Invoke(true);
                     return default(T);
                 }
             }
             catch (CloudSaveException e)
             {
                 Debug.LogError($"BackendManager: Cloud Load 실패 (Key: {key}): {e.Message}");
+                OnLoadComplete?.Invoke(false);
                 throw;
             }
             catch (Exception e)
             {
                 Debug.LogError($"BackendManager: Cloud Load 알 수 없는 오류 (Key: {key}): {e.Message}");
+                OnLoadComplete?.Invoke(false);
                 throw;
             }
         }
@@ -197,19 +245,23 @@ namespace Backend
         /// </summary>
         public async Task DeleteAllData()
         {
+            OnResetStart?.Invoke();
             try
             {
                 await CloudSaveService.Instance.Data.Player.DeleteAllAsync();
                 Debug.Log("BackendManager: Cloud Save 모든 데이터 삭제 성공");
+                OnResetComplete?.Invoke(true);
             }
             catch (CloudSaveException e)
             {
                 Debug.LogError($"BackendManager: Cloud Save 데이터 삭제 실패: {e.Message}");
+                OnResetComplete?.Invoke(false);
                 throw;
             }
             catch (Exception e)
             {
                 Debug.LogError($"BackendManager: Cloud Save 데이터 삭제 알 수 없는 오류: {e.Message}");
+                OnResetComplete?.Invoke(false);
                 throw;
             }
         }

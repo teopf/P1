@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &2932127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &8880393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &17797651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2381,6 +2387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &56908197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2668,6 +2676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &63734778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3080,6 +3090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &69899606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3413,6 +3425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &88189883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4403,6 +4417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &112637341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4754,6 +4770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &119720990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,6 +5828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &168507764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6324,6 +6344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &172646314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7145,6 +7167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &177560694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8112,6 +8136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &194845530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8262,6 +8288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &195968286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9394,6 +9422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &215273431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9879,6 +9909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &246070779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10334,6 +10366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &256101914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11327,6 +11361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &293722250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12126,6 +12162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &325228954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13310,6 +13348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &344509241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16058,6 +16098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &415400351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18233,6 +18275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &470371387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19313,6 +19357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &506669798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19803,6 +19849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &527291630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21956,6 +22004,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &580622014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22470,6 +22520,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582851380}
+  m_CullTransparentMesh: 1
+--- !u!1 &584399506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584399507}
+  - component: {fileID: 584399509}
+  - component: {fileID: 584399508}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &584399507
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584399506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908503944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &584399508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584399506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 30
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uCD08\uAE30\uD654"
+--- !u!222 &584399509
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584399506}
   m_CullTransparentMesh: 1
 --- !u!1 &587006517
 GameObject:
@@ -23170,7 +23299,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 30
@@ -23180,7 +23309,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: b18
+  m_Text: "\uC218\uB3D9 \uC800\uC7A5"
 --- !u!222 &606099030
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23727,6 +23856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &624627033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23877,6 +24008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &629935552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24027,6 +24160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &630460632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24541,7 +24676,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &637356542
 MonoBehaviour:
@@ -25084,6 +25219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &652844824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25235,6 +25372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &653514885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25865,6 +26004,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &662136767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26305,6 +26446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &679919442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27776,6 +27919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &730686756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30081,6 +30226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &777790042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30231,6 +30378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &780943454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30381,6 +30530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &783417273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30669,6 +30820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &794107322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31626,6 +31779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &816935331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32884,6 +33039,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &842525262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34599,6 +34756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &901700983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35118,6 +35277,158 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905301794}
   m_CullTransparentMesh: 1
+--- !u!1 &908503943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908503944}
+  - component: {fileID: 908503949}
+  - component: {fileID: 908503948}
+  - component: {fileID: 908503947}
+  - component: {fileID: 908503946}
+  - component: {fileID: 908503945}
+  m_Layer: 0
+  m_Name: b19
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &908503944
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 584399507}
+  m_Father: {fileID: 1507540931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -2.5999756, y: 0}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &908503945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
+--- !u!114 &908503946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.3}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &908503947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 908503948}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &908503948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.89411765, b: 0.76862746, a: 0.8509804}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 581054746}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &908503949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908503943}
+  m_CullTransparentMesh: 1
 --- !u!1 &909540471
 GameObject:
   m_ObjectHideFlags: 0
@@ -35375,6 +35686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &912732163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36952,6 +37265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &958630053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37221,8 +37536,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchoredPosition: {x: -246, y: -66}
+  m_SizeDelta: {x: -720, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &962124488
 GameObject:
@@ -37277,6 +37592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &962124491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37427,6 +37744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &962195206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37653,6 +37972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &968791478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37974,6 +38295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &973128563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38992,6 +39315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &993426663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39778,6 +40103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1016201558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39928,6 +40255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1019077645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41226,7 +41555,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 100
@@ -43854,6 +44183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1092763116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45102,6 +45433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a628a84cacf8394d965348aaa85cbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDController
+  preAssignedMenuObjects: []
 --- !u!114 &1123446361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45319,6 +45651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1129563597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48318,6 +48652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1186587377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48818,6 +49154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1192359795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49974,6 +50312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1221467747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50432,6 +50772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1224912816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50674,6 +51016,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1228216598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51452,6 +51796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1257340311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51938,6 +52284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1275841755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52622,6 +52970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1295391031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53228,8 +53578,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -53811,10 +54161,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 62a46cae8075de34f8b2e83ad170f7ce, type: 2}
+  m_sharedMaterial: {fileID: -4019193157931427601, guid: 62a46cae8075de34f8b2e83ad170f7ce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -53833,7 +54183,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -53861,13 +54211,13 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
-  m_isOrthographic: 0
+  m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
@@ -54496,6 +54846,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1361546234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55228,6 +55580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1375794036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55515,6 +55869,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1377365374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58135,7 +58491,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Placeholder
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 62a46cae8075de34f8b2e83ad170f7ce, type: 2}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -58202,7 +58558,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1437137895
@@ -58781,6 +59137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1465914086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59211,14 +59569,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: Type a message...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
+  m_fontAsset: {fileID: 11400000, guid: 62a46cae8075de34f8b2e83ad170f7ce, type: 2}
+  m_sharedMaterial: {fileID: -4019193157931427601, guid: 62a46cae8075de34f8b2e83ad170f7ce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 2164260863
   m_fontColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -59231,7 +59589,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -59259,13 +59617,13 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
   m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
-  m_isOrthographic: 0
+  m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
@@ -59549,6 +59907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1500785474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59678,6 +60038,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1228216596}
+  - {fileID: 908503944}
   - {fileID: 1019077643}
   - {fileID: 1361546232}
   - {fileID: 119531028}
@@ -63763,6 +64124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1574995638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64928,6 +65291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1596254466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66337,6 +66702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1642142927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66645,6 +67012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1648830449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67449,6 +67818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1676203566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68339,6 +68710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1717889903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68991,6 +69364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1733422052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72167,6 +72542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1806337371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72938,6 +73315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1814054227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73088,6 +73467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1815206247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73375,6 +73756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1825213198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73604,6 +73987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1830179070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74062,6 +74447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1840740389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74407,6 +74794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1847375852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74872,6 +75261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1855059220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75704,6 +76095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1897362097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76055,6 +76448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1903529228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78530,6 +78925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1940420190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78984,6 +79381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &1948336409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81796,6 +82195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &2060026392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82214,6 +82615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &2064685450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82542,6 +82945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &2074805075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83602,6 +84007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1faa3ab4e4d6541ac9a1d02cc8f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverEffect
+  scaleFactor: 1.1
+  duration: 0.1
 --- !u!114 &2108965781
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Backend;
+using System.Collections;
 using System.Numerics;
 using TMPro;
 using UI.Core;
+using Vector2 = UnityEngine.Vector2;
 
 namespace UI
 {
@@ -13,9 +15,15 @@ namespace UI
     /// </summary>
     public class HUDUserDataDisplay : UIBase
     {
+        // PlayerDataManager 대기 코루틴 참조
+        private Coroutine waitForManagerCoroutine;
+        private bool isSubscribed = false;
+
         [Header("통화 표시 (Currency)")]
-        [SerializeField] private TextMeshProUGUI goldText;      // B17에 할당
-        [SerializeField] private TextMeshProUGUI gemText;       // B16에 할당
+        [SerializeField] private TextMeshProUGUI goldText;      // Resource_Info_Group/Text_Gold
+        [SerializeField] private TextMeshProUGUI gemText;       // Resource_Info_Group/Text_Gem
+
+        [Header("레이아웃 설정 (Resource Layout)")]
 
         [Header("플레이어 정보 (Player Info)")]
         [SerializeField] private TextMeshProUGUI playerIdText;   // ID 표시
@@ -38,29 +46,70 @@ namespace UI
         protected override void OnEnable()
         {
             base.OnEnable();
+
+            // 레이아웃 설정 (VerticalLayoutGroup, Raycast 등)
+            SetupResourceLayout();
+
             // PlayerDataManager 이벤트 구독
             if (PlayerDataManager.Instance != null)
             {
-                PlayerDataManager.Instance.OnDataChanged += UpdateAllUI;
-                PlayerDataManager.Instance.OnGoldChanged += UpdateGold;
-                PlayerDataManager.Instance.OnGemChanged += UpdateGem;
-                PlayerDataManager.Instance.OnLevelChanged += UpdateLevel;
-                PlayerDataManager.Instance.OnExpChanged += UpdateExp;
-
-                // 초기 UI 업데이트
-                UpdateAllUI(PlayerDataManager.Instance.CurrentData);
+                SubscribeToEvents();
             }
             else
             {
-                Debug.LogWarning("[HUDUserDataDisplay] PlayerDataManager가 없습니다. 씬에 PlayerDataManager가 있는지 확인하세요.");
+                // PlayerDataManager가 아직 초기화되지 않은 경우 대기 후 구독
+                Debug.Log("[HUDUserDataDisplay] PlayerDataManager 대기 중...");
+                waitForManagerCoroutine = StartCoroutine(WaitForPlayerDataManager());
             }
+        }
+
+        /// <summary>
+        /// PlayerDataManager가 준비될 때까지 대기하는 코루틴
+        /// </summary>
+        private IEnumerator WaitForPlayerDataManager()
+        {
+            // PlayerDataManager.Instance가 생성될 때까지 대기
+            while (PlayerDataManager.Instance == null)
+            {
+                yield return null;
+            }
+
+            Debug.Log("[HUDUserDataDisplay] PlayerDataManager 감지, 이벤트 구독 시작");
+            SubscribeToEvents();
+            waitForManagerCoroutine = null;
+        }
+
+        /// <summary>
+        /// PlayerDataManager 이벤트 구독 및 초기 UI 업데이트
+        /// </summary>
+        private void SubscribeToEvents()
+        {
+            if (isSubscribed) return;
+
+            PlayerDataManager.Instance.OnDataChanged += UpdateAllUI;
+            PlayerDataManager.Instance.OnGoldChanged += UpdateGold;
+            PlayerDataManager.Instance.OnGemChanged += UpdateGem;
+            PlayerDataManager.Instance.OnLevelChanged += UpdateLevel;
+            PlayerDataManager.Instance.OnExpChanged += UpdateExp;
+            isSubscribed = true;
+
+            // 초기 UI 업데이트
+            UpdateAllUI(PlayerDataManager.Instance.CurrentData);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+
+            // 대기 코루틴 정리
+            if (waitForManagerCoroutine != null)
+            {
+                StopCoroutine(waitForManagerCoroutine);
+                waitForManagerCoroutine = null;
+            }
+
             // 이벤트 구독 해제
-            if (PlayerDataManager.Instance != null)
+            if (isSubscribed && PlayerDataManager.Instance != null)
             {
                 PlayerDataManager.Instance.OnDataChanged -= UpdateAllUI;
                 PlayerDataManager.Instance.OnGoldChanged -= UpdateGold;
@@ -68,6 +117,7 @@ namespace UI
                 PlayerDataManager.Instance.OnLevelChanged -= UpdateLevel;
                 PlayerDataManager.Instance.OnExpChanged -= UpdateExp;
             }
+            isSubscribed = false;
         }
 
 #if UNITY_EDITOR
@@ -215,6 +265,52 @@ namespace UI
                 return t.ToString("0.#") + "T";
             }
             */
+        }
+
+        // ============================================
+        // 레이아웃 설정 메서드
+        // ============================================
+
+        /// <summary>
+        /// 재화 텍스트의 부모에 VerticalLayoutGroup을 설정하고 Raycast를 끔
+        /// 에디터/런타임 양쪽에서 호출 가능
+        /// </summary>
+        [ContextMenu("Setup Resource Layout")]
+        private void SetupResourceLayout()
+        {
+            if (goldText == null || gemText == null) return;
+
+            // goldText와 gemText의 공통 부모(Resource_Info_Group)에 레이아웃 설정
+            Transform parent = goldText.transform.parent;
+            if (parent == null) return;
+
+            // VerticalLayoutGroup 추가 (이미 있으면 가져옴)
+            VerticalLayoutGroup vlg = parent.GetComponent<VerticalLayoutGroup>();
+            if (vlg == null) vlg = parent.gameObject.AddComponent<VerticalLayoutGroup>();
+
+            vlg.spacing = 10f;
+            vlg.childAlignment = TextAnchor.MiddleRight;
+            vlg.childControlWidth = true;
+            vlg.childControlHeight = true;
+            vlg.childForceExpandWidth = false;
+            vlg.childForceExpandHeight = false;
+
+            // ContentSizeFitter 추가
+            ContentSizeFitter csf = parent.GetComponent<ContentSizeFitter>();
+            if (csf == null) csf = parent.gameObject.AddComponent<ContentSizeFitter>();
+
+            csf.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+            csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            // Raycast Target Off (단순 표시용 텍스트)
+            goldText.raycastTarget = false;
+            gemText.raycastTarget = false;
+
+            // CanvasGroup 추가하여 하위 요소 레이캐스트 차단 방지
+            CanvasGroup cg = parent.GetComponent<CanvasGroup>();
+            if (cg == null) cg = parent.gameObject.AddComponent<CanvasGroup>();
+            cg.blocksRaycasts = false;
+            cg.interactable = false;
         }
 
         // ============================================

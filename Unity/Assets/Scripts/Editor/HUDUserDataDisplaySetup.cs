@@ -40,7 +40,8 @@ public class HUDUserDataDisplaySetup : EditorWindow
 
         // 2. 기존 요소가 있는지 확인 (중복 생성 방지)
         bool hasExisting = topPanel.Find("PlayerInfo_Group") != null ||
-                          topPanel.Find("ExpBar_Group") != null;
+                          topPanel.Find("ExpBar_Group") != null ||
+                          topPanel.Find("Resource_Info_Group") != null;
 
         if (hasExisting)
         {
@@ -62,12 +63,17 @@ public class HUDUserDataDisplaySetup : EditorWindow
 
             existing = topPanel.Find("ExpBar_Group");
             if (existing != null) DestroyImmediate(existing.gameObject);
+
+            existing = topPanel.Find("Resource_Info_Group");
+            if (existing != null) DestroyImmediate(existing.gameObject);
         }
 
         // 3. UI 요소 생성
+        // 3. UI 요소 생성
         CreatePlayerInfoGroup(topPanel);
         CreateExpBarGroup(topPanel);
-        SetupCurrencyPanels(topPanel);
+        // RemoveLegacyCurrencyPanels(topPanel); // 함수 삭제됨
+        SetupResourceInfoGroup(topPanel);
 
         // 4. HUDUserDataDisplay 컴포넌트 추가 및 연결
         SetupHUDUserDataDisplayComponent(topPanel.gameObject);
@@ -155,10 +161,8 @@ public class HUDUserDataDisplaySetup : EditorWindow
         groupRect.anchorMin = new Vector2(0, 1); // Top-Left
         groupRect.anchorMax = new Vector2(1, 1); // Top-Right (Stretch Horizontal)
         groupRect.pivot = new Vector2(0.5f, 1);
-        groupRect.anchoredPosition = new Vector2(0, -20);
-        groupRect.offsetMin = new Vector2(200, groupRect.offsetMin.y); // Left: 200px
-        groupRect.offsetMax = new Vector2(-200, groupRect.offsetMax.y); // Right: -200px
-        groupRect.sizeDelta = new Vector2(0, 30); // Height만 지정
+        groupRect.anchoredPosition = new Vector2(-246, -66); // Scene 값 반영
+        groupRect.sizeDelta = new Vector2(-720, 30); // Scene 값 반영 (Height 30, Width padding)
 
         // ExpBar_Background 생성
         GameObject bgObj = new GameObject("ExpBar_Background");
@@ -211,71 +215,122 @@ public class HUDUserDataDisplaySetup : EditorWindow
     }
 
     /// <summary>
-    /// b16, b17 패널에 텍스트 추가 (Gem, Gold)
+    /// Resource_Info_Group 생성 (VerticalLayoutGroup + Text_Gold + Text_Gem)
+    /// 좌측에 있는 버튼(b16 > b17 > b18)을 찾아 그 왼쪽에 배치
     /// </summary>
-    private static void SetupCurrencyPanels(Transform parent)
+    private static void SetupResourceInfoGroup(Transform parent)
     {
-        // b16 (Gem Panel) 설정
+        // 기존 Resource_Info_Group 삭제
+        Transform existingGroup = parent.Find("Resource_Info_Group");
+        if (existingGroup != null) DestroyImmediate(existingGroup.gameObject);
+
+        // Resource_Info_Group 컨테이너 생성
+        GameObject groupObj = new GameObject("Resource_Info_Group");
+        groupObj.transform.SetParent(parent, false);
+
+        // RectTransform: Top-Right 앵커
+        RectTransform groupRect = groupObj.AddComponent<RectTransform>();
+        groupRect.anchorMin = new Vector2(1, 1);
+        groupRect.anchorMax = new Vector2(1, 1);
+        groupRect.pivot = new Vector2(1, 1);
+
+        // 기준 버튼 찾기 (b16 > b17 > b18 순서로 왼쪽 버튼 찾기)
+        RectTransform targetBtn = null;
         Transform b16 = parent.Find("b16");
-        if (b16 != null)
-        {
-            // 기존 Gem_Text가 있으면 삭제
-            Transform existingGem = b16.Find("Gem_Text");
-            if (existingGem != null) DestroyImmediate(existingGem.gameObject);
-
-            GameObject gemTextObj = new GameObject("Gem_Text");
-            gemTextObj.transform.SetParent(b16, false);
-
-            TextMeshProUGUI gemText = gemTextObj.AddComponent<TextMeshProUGUI>();
-            gemText.text = "젬: 0";
-            gemText.fontSize = 14;
-            gemText.color = COLOR_CYAN;
-            gemText.alignment = TextAlignmentOptions.Center;
-            gemText.fontStyle = FontStyles.Bold;
-
-            RectTransform gemRect = gemTextObj.GetComponent<RectTransform>();
-            gemRect.anchorMin = Vector2.zero;
-            gemRect.anchorMax = Vector2.one;
-            gemRect.offsetMin = new Vector2(10, 10);
-            gemRect.offsetMax = new Vector2(-10, -10);
-
-            Debug.Log("[Setup] b16 > Gem_Text 생성 완료");
-        }
-        else
-        {
-            Debug.LogWarning("[Setup] b16 패널을 찾을 수 없습니다.");
-        }
-
-        // b17 (Gold Panel) 설정
         Transform b17 = parent.Find("b17");
-        if (b17 != null)
+        Transform b18 = parent.Find("b18");
+
+        if (b16 != null) targetBtn = b16.GetComponent<RectTransform>();
+        else if (b17 != null) targetBtn = b17.GetComponent<RectTransform>();
+        else if (b18 != null) targetBtn = b18.GetComponent<RectTransform>();
+
+        if (targetBtn != null)
         {
-            // 기존 Gold_Text가 있으면 삭제
-            Transform existingGold = b17.Find("Gold_Text");
-            if (existingGold != null) DestroyImmediate(existingGold.gameObject);
-
-            GameObject goldTextObj = new GameObject("Gold_Text");
-            goldTextObj.transform.SetParent(b17, false);
-
-            TextMeshProUGUI goldText = goldTextObj.AddComponent<TextMeshProUGUI>();
-            goldText.text = "골드: 0";
-            goldText.fontSize = 14;
-            goldText.color = COLOR_GOLD;
-            goldText.alignment = TextAlignmentOptions.Center;
-            goldText.fontStyle = FontStyles.Bold;
-
-            RectTransform goldRect = goldTextObj.GetComponent<RectTransform>();
-            goldRect.anchorMin = Vector2.zero;
-            goldRect.anchorMax = Vector2.one;
-            goldRect.offsetMin = new Vector2(10, 10);
-            goldRect.offsetMax = new Vector2(-10, -10);
-
-            Debug.Log("[Setup] b17 > Gold_Text 생성 완료");
+            // 버튼의 Pivot이 (1, 0.5)라고 가정 (HUDGenerator 설정)
+            // anchoredPosition.x는 버튼의 오른쪽 끝 위치
+            // 버튼의 너비만큼 왼쪽으로 가서, 추가 여백 20을 둠
+            // b16(-280), b17(-180), b18(-80)
+            
+            // 버튼들 너비가 80이라고 가정 (Scene 데이터 확인됨)
+            // b16(-280)의 왼쪽 끝은 -360. 
+            // -360 - 20 = -380 위치에 배ㅊ
+            
+            float btnX = targetBtn.anchoredPosition.x;
+            float btnWidth = targetBtn.sizeDelta.x;
+            
+            // Pivot X가 1이면 anchoredPosition.x가 Right Edge
+            // Pivot X가 0.5면 anchoredPosition.x가 Center -> Right Edge는 x + width/2
+            
+            float rightEdgeX = btnX;
+            if (targetBtn.pivot.x == 0.5f) rightEdgeX += btnWidth * 0.5f;
+            else if (targetBtn.pivot.x == 0f) rightEdgeX += btnWidth;
+            
+            float leftEdgeX = rightEdgeX - btnWidth;
+            
+            // ResourceGroup Pivot X=1 (Right Align)
+            // Position it at LeftEdgeX - Padding
+            float offsetX = leftEdgeX - 20f;
+            
+            groupRect.anchoredPosition = new Vector2(offsetX, -10);
         }
         else
         {
-            Debug.LogWarning("[Setup] b17 패널을 찾을 수 없습니다.");
+            // 버튼이 없으면 기본 위치
+            groupRect.anchoredPosition = new Vector2(-20, -10);
         }
+
+        groupRect.sizeDelta = new Vector2(200, 60);
+
+        // VerticalLayoutGroup 추가
+        VerticalLayoutGroup vlg = groupObj.AddComponent<VerticalLayoutGroup>();
+        vlg.spacing = 10f;
+        vlg.childAlignment = TextAnchor.MiddleRight;
+        vlg.childControlWidth = true;
+        vlg.childControlHeight = true;
+        vlg.childForceExpandWidth = false;
+        vlg.childForceExpandHeight = false;
+
+        // ContentSizeFitter 추가
+        ContentSizeFitter csf = groupObj.AddComponent<ContentSizeFitter>();
+        csf.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+        // CanvasGroup 추가 (Raycast 차단 방지)
+        CanvasGroup cg = groupObj.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+
+        // Text_Gold 생성 (골드 표시)
+        GameObject goldTextObj = new GameObject("Text_Gold");
+        goldTextObj.transform.SetParent(groupObj.transform, false);
+
+        TextMeshProUGUI goldText = goldTextObj.AddComponent<TextMeshProUGUI>();
+        goldText.text = "골드: 0";
+        goldText.fontSize = 18;
+        goldText.color = COLOR_GOLD;
+        goldText.alignment = TextAlignmentOptions.Right;
+        goldText.fontStyle = FontStyles.Bold;
+        goldText.raycastTarget = false; // 단순 표시용, 클릭 불필요
+
+        RectTransform goldRect = goldTextObj.GetComponent<RectTransform>();
+        goldRect.sizeDelta = new Vector2(200, 24);
+
+        // Text_Gem 생성 (젬 표시)
+        GameObject gemTextObj = new GameObject("Text_Gem");
+        gemTextObj.transform.SetParent(groupObj.transform, false);
+
+        TextMeshProUGUI gemText = gemTextObj.AddComponent<TextMeshProUGUI>();
+        gemText.text = "젬: 0";
+        gemText.fontSize = 18;
+        gemText.color = COLOR_CYAN;
+        gemText.alignment = TextAlignmentOptions.Right;
+        gemText.fontStyle = FontStyles.Bold;
+        gemText.raycastTarget = false; // 단순 표시용, 클릭 불필요
+
+        RectTransform gemRect = gemTextObj.GetComponent<RectTransform>();
+        gemRect.sizeDelta = new Vector2(200, 24);
+
+        Debug.Log("[Setup] Resource_Info_Group 생성 완료 (Text_Gold, Text_Gem)");
     }
 
     /// <summary>
@@ -299,30 +354,43 @@ public class HUDUserDataDisplaySetup : EditorWindow
         // 필드 찾기 및 연결
         Transform playerInfoGroup = topPanel.transform.Find("PlayerInfo_Group");
         Transform expBarGroup = topPanel.transform.Find("ExpBar_Group");
-        Transform b16 = topPanel.transform.Find("b16");
-        Transform b17 = topPanel.transform.Find("b17");
+        Transform resourceInfoGroup = topPanel.transform.Find("Resource_Info_Group");
 
-        // goldText 연결
-        if (b17 != null)
+        // goldText 연결 (Resource_Info_Group/Text_Gold)
+        if (resourceInfoGroup != null)
         {
-            Transform goldText = b17.Find("Gold_Text");
+            Transform goldText = resourceInfoGroup.Find("Text_Gold");
             if (goldText != null)
             {
                 SerializedProperty goldTextProp = serializedObject.FindProperty("goldText");
                 goldTextProp.objectReferenceValue = goldText.GetComponent<TextMeshProUGUI>();
             }
-        }
 
-        // gemText 연결
-        if (b16 != null)
-        {
-            Transform gemText = b16.Find("Gem_Text");
+            // gemText 연결 (Resource_Info_Group/Text_Gem)
+            Transform gemText = resourceInfoGroup.Find("Text_Gem");
             if (gemText != null)
             {
                 SerializedProperty gemTextProp = serializedObject.FindProperty("gemText");
                 gemTextProp.objectReferenceValue = gemText.GetComponent<TextMeshProUGUI>();
             }
         }
+
+        // manualSaveButton 연결 (b18) - HUDUserDataDisplay에 필드가 없어 에러 발생 가능하여 주석 처리
+        /*
+        Transform b18 = topPanel.transform.Find("b18");
+        if (b18 != null)
+        {
+            Button saveBtn = b18.GetComponent<Button>();
+            if (saveBtn != null)
+            {
+                SerializedProperty saveBtnProp = serializedObject.FindProperty("manualSaveButton");
+                if (saveBtnProp != null)
+                {
+                    saveBtnProp.objectReferenceValue = saveBtn;
+                }
+            }
+        }
+        */
 
         // playerIdText 연결
         if (playerInfoGroup != null)
