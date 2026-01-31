@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UI.Core;
 
-public class A2MenuController : MonoBehaviour
+public class A2MenuController : UIBase
 {
     [Header("UI References")]
     public Button btnClose; // b101
@@ -16,8 +17,10 @@ public class A2MenuController : MonoBehaviour
     private CanvasGroup canvasGroup;
     private bool isAnimating = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         // Auto-link references if not assigned
         if (contentPanel == null) contentPanel = transform.Find("Panel_AA101_Header")?.parent; // Canvas Root
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
@@ -58,8 +61,9 @@ public class A2MenuController : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         // Animate Entry
         StartCoroutine(AnimatePanel(true));
         

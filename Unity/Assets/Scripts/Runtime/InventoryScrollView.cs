@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UI.Core;
 
-public class InventoryScrollView : MonoBehaviour
+public class InventoryScrollView : UIBase
 {
     [Header("Configuration")]
     public GameObject itemPrefab; // We'll assume the generator created slots we can clone or use existing
@@ -11,8 +12,9 @@ public class InventoryScrollView : MonoBehaviour
     private List<GameObject> activeItems = new List<GameObject>();
     private List<GameObject> pooledItems = new List<GameObject>();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (contentRoot == null) contentRoot = GetComponent<ScrollRect>()?.content;
         
         // Initialize pool from existing items created by Generator
