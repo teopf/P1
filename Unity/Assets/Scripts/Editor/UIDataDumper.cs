@@ -9,21 +9,20 @@ public class UIDataDumper : EditorWindow
     public static void Dump()
     {
         StringBuilder sb = new StringBuilder();
-        
-        // Target 1: Chat Overlay
-        DumpRecursively(sb, "Canvas_ChatOverlay");
 
-        // Target 2: A2 Inventory
-        DumpRecursively(sb, "Canvas_A2_Inventory");
+        // 씬의 모든 Canvas를 자동으로 찾아서 덤프
+        Canvas[] allCanvases = Object.FindObjectsOfType<Canvas>(true);
+        sb.AppendLine($"Total Canvases Found: {allCanvases.Length}");
+        sb.AppendLine("==================================================");
 
-        // Target 3: HUD (Check specific buttons)
-        DumpRecursively(sb, "HUD_Canvas"); // Or whatever the root is named in HUDGenerator usually
-        // Also check "SubMenu_Canvas" just in case
-        DumpRecursively(sb, "SubMenu_Canvas");
+        foreach (var canvas in allCanvases)
+        {
+            DumpRecursively(sb, canvas.name);
+        }
 
         string path = "Assets/UI_Dump.txt";
         File.WriteAllText(path, sb.ToString());
-        Debug.Log($"UI Data Dumped to {path}");
+        Debug.Log($"UI Data Dumped to {path} - {allCanvases.Length} canvases dumped");
         AssetDatabase.Refresh();
     }
 
