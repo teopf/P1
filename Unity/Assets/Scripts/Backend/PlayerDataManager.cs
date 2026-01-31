@@ -443,5 +443,44 @@ namespace Backend
                 return null;
             }
         }
+
+        // ============================================
+        // 데이터 초기화 (테스트용)
+        // ============================================
+
+        /// <summary>
+        /// 모든 데이터를 초기화합니다 (클라우드 + 로컬).
+        /// 테스트 목적으로 사용됩니다.
+        /// </summary>
+        public async void ResetData()
+        {
+            Debug.Log("PlayerDataManager: 데이터 초기화 시작...");
+
+            try
+            {
+                // 1. CurrentData를 초기값으로 리셋
+                CurrentData = new UserData();
+
+                // 2. 클라우드 데이터 삭제
+                if (BackendManager.Instance != null)
+                {
+                    await BackendManager.Instance.DeleteAllData();
+                }
+
+                // 3. 로컬 PlayerPrefs 삭제
+                PlayerPrefs.DeleteKey(LOCAL_BACKUP_KEY);
+                PlayerPrefs.DeleteKey(LOCAL_TIMESTAMP_KEY);
+                PlayerPrefs.Save();
+
+                // 4. UI 갱신
+                RefreshUI();
+
+                Debug.Log("PlayerDataManager: 데이터 초기화 완료");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"PlayerDataManager: 데이터 초기화 실패: {e.Message}");
+            }
+        }
     }
 }

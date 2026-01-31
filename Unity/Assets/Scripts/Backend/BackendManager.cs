@@ -191,5 +191,27 @@ namespace Backend
                 throw;
             }
         }
+
+        /// <summary>
+        /// Cloud Save의 모든 플레이어 데이터를 삭제합니다.
+        /// </summary>
+        public async Task DeleteAllData()
+        {
+            try
+            {
+                await CloudSaveService.Instance.Data.Player.DeleteAllAsync();
+                Debug.Log("BackendManager: Cloud Save 모든 데이터 삭제 성공");
+            }
+            catch (CloudSaveException e)
+            {
+                Debug.LogError($"BackendManager: Cloud Save 데이터 삭제 실패: {e.Message}");
+                throw;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"BackendManager: Cloud Save 데이터 삭제 알 수 없는 오류: {e.Message}");
+                throw;
+            }
+        }
     }
 }

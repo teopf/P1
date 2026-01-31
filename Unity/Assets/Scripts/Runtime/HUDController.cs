@@ -52,12 +52,20 @@ public class HUDController : MonoBehaviour
             {
                 btn.onClick.AddListener(() => OnMenuToggleClicked(btn, id));
             }
+            else if (id == "b18") // 수동 저장 버튼
+            {
+                btn.onClick.AddListener(() => OnManualSaveClicked(btn));
+            }
+            else if (id == "b19") // 데이터 초기화 버튼
+            {
+                btn.onClick.AddListener(() => OnResetDataClicked(btn));
+            }
             else
             {
                 btn.onClick.AddListener(() => OnGenericButtonClicked(id));
             }
         }
-        
+
         // 3. GLOBAL: Find "b101" (Close) buttons in ALL Canvases (Scene)
         // This ensures ANY menu with a b101 button will close itself when clicked.
         RegisterGlobalCloseButtons();
@@ -228,6 +236,51 @@ public class HUDController : MonoBehaviour
     private void OnGenericButtonClicked(string id)
     {
         Debug.Log($"HUDController: Button '{id}' clicked.");
+    }
+
+    /// <summary>
+    /// 수동 저장 버튼 클릭 핸들러 (b18)
+    /// </summary>
+    private async void OnManualSaveClicked(Button btn)
+    {
+        Debug.Log("HUDController: 수동 저장 버튼 클릭");
+        StartCoroutine(AnimateButtonPunch(btn.transform));
+
+        if (Backend.PlayerDataManager.Instance != null)
+        {
+            bool success = await Backend.PlayerDataManager.Instance.SaveToCloud();
+            if (success)
+            {
+                Debug.Log("HUDController: 수동 저장 성공!");
+            }
+            else
+            {
+                Debug.LogWarning("HUDController: 수동 저장 실패");
+            }
+        }
+        else
+        {
+            Debug.LogError("HUDController: PlayerDataManager 인스턴스를 찾을 수 없습니다.");
+        }
+    }
+
+    /// <summary>
+    /// 데이터 초기화 버튼 클릭 핸들러 (b19)
+    /// </summary>
+    private void OnResetDataClicked(Button btn)
+    {
+        Debug.Log("HUDController: 데이터 초기화 버튼 클릭");
+        StartCoroutine(AnimateButtonPunch(btn.transform));
+
+        if (Backend.PlayerDataManager.Instance != null)
+        {
+            Backend.PlayerDataManager.Instance.ResetData();
+            Debug.Log("HUDController: 데이터 초기화 완료!");
+        }
+        else
+        {
+            Debug.LogError("HUDController: PlayerDataManager 인스턴스를 찾을 수 없습니다.");
+        }
     }
 
     private GameObject FindInactiveObject(string name)
