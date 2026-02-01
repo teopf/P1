@@ -161,7 +161,7 @@ public class HUDUserDataDisplaySetup : EditorWindow
         groupRect.anchorMin = new Vector2(0, 1); // Top-Left
         groupRect.anchorMax = new Vector2(1, 1); // Top-Right (Stretch Horizontal)
         groupRect.pivot = new Vector2(0.5f, 1);
-        groupRect.anchoredPosition = new Vector2(-246, -66); // Scene 값 반영
+        groupRect.anchoredPosition = new Vector2(76, -57); // Scene 값 반영
         groupRect.sizeDelta = new Vector2(-720, 30); // Scene 값 반영 (Height 30, Width padding)
 
         // ExpBar_Background 생성

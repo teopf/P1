@@ -3,40 +3,39 @@ using UnityEngine.UI;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using UnityEngine.InputSystem;
+using TMPro;
 
 namespace Backend
 { 
     /// <summary>
-    /// UGS 백엔드 상태 표시기
-    /// - Player ID: 좌측 상단 표시
-    /// - Server Log: 별도의 콘솔 윈도우(토글 가능)
+    /// UGS 백엔드 상태 표시기 (HUD_Canvas 통합 버전)
+    /// - Player ID: AA1_TopPanel > PlayerInfo_Group > Backend_PID_Text
+    /// - Server Log: HUD_Canvas > Backend_LogPanel (F1 토글)
+    /// 
+    /// 사전 요구사항:
+    /// 1. Tools > UI > Generate HUD Layout 실행
+    /// 2. Tools > UI > Setup HUD User Data Display 실행
+    /// 3. Tools > UI > Setup Backend Status Display 실행
     /// </summary>
     public class BackendStatusDisplay : MonoBehaviour
     {
-        [Header("Player ID UI")]
-        [Tooltip("Player ID 표시 여부")]
+        [Header("UI 참조 (자동 연결)")]
+        [SerializeField] private TextMeshProUGUI _playerIDText;
+        [SerializeField] private GameObject _logPanelObj;
+        [SerializeField] private TextMeshProUGUI _logText;
+
+        [Header("설정")]
         [SerializeField] private bool showPlayerID = true;
-        [SerializeField] private int playerIDFontSize = 24;
-        [SerializeField] private Color playerIDColor = Color.white;
-
-        [Header("Log Window UI")]
-        [Tooltip("로그 윈도우 초기 표시 여부")]
         [SerializeField] private bool showLogWindow = false;
-        [SerializeField] private int logFontSize = 18;
         [SerializeField] private KeyCode toggleKey = KeyCode.F1;
-
-        // UI References
-        private GameObject _canvasObj;
-        private Text _playerIDText;
-        private GameObject _logPanelObj;
-        private Text _logText;
         
         private string _logData = "";
         private string _currentPlayerID = "Not Signed In";
 
         void Start()
         {
-            CreateUI();
+            // UI 요소 자동 찾기
+            FindUIReferences();
             
             Log("BackendStatusDisplay Started.");
 
@@ -57,9 +56,54 @@ namespace Backend
             HandleInput();
         }
 
+        /// <summary>
+        /// HUD_Canvas에서 UI 요소 자동 찾기
+        /// </summary>
+        private void FindUIReferences()
+        {
+            // Backend_PID_Text 찾기 (PlayerID_Text의 자식)
+            if (_playerIDText == null)
+            {
+                Transform pidTrans = transform.root.Find("HUD_Canvas/AA1_TopPanel/PlayerInfo_Group/PlayerID_Text/Backend_PID_Text");
+                // 만약 못찾으면 이전 경로(혹시 모를 호환성)도 시도해볼 수 있지만, Setup을 실행하라고 안내하는게 나음
+                if (pidTrans == null) pidTrans = GameObject.Find("HUD_Canvas/AA1_TopPanel/PlayerInfo_Group/PlayerID_Text/Backend_PID_Text")?.transform;
+                
+                if (pidTrans != null)
+                {
+                    _playerIDText = pidTrans.GetComponent<TextMeshProUGUI>();
+                }
+            }
+
+            // Backend_LogPanel 찾기
+            if (_logPanelObj == null)
+            {
+                _logPanelObj = GameObject.Find("HUD_Canvas/Backend_LogPanel");
+            }
+
+            // LogText 찾기
+            if (_logText == null && _logPanelObj != null)
+            {
+                Transform logTextTransform = _logPanelObj.transform.Find("LogText");
+                if (logTextTransform != null)
+                {
+                    _logText = logTextTransform.GetComponent<TextMeshProUGUI>();
+                }
+            }
+
+            // 찾지 못한 경우 경고
+            if (_playerIDText == null)
+            {
+                Debug.LogWarning("[BackendStatusDisplay] Backend_PID_Text를 찾을 수 없습니다. 'Tools > UI > Setup Backend Status Display' 메뉴를 실행해주세요.");
+            }
+            if (_logPanelObj == null)
+            {
+                Debug.LogWarning("[BackendStatusDisplay] Backend_LogPanel을 찾을 수 없습니다. 'Tools > UI > Setup Backend Status Display' 메뉴를 실행해주세요.");
+            }
+        }
+
         private void HandleInput()
         {
-            // F1 키로 로그 윈도우 토글 (Legacy Input / New Input 둘 다 대응)
+            // F1 키로 로그 윈도우 토글
             bool toggle = false;
 #if ENABLE_INPUT_SYSTEM
             if (Keyboard.current != null && Keyboard.current.f1Key.wasPressedThisFrame) toggle = true;
@@ -81,15 +125,12 @@ namespace Backend
             {
                 _playerIDText.gameObject.SetActive(showPlayerID);
                 _playerIDText.text = $"PID: {_currentPlayerID}";
-                _playerIDText.fontSize = playerIDFontSize;
-                _playerIDText.color = playerIDColor;
             }
 
             // Log Text 업데이트
             if (_logText != null && showLogWindow)
             {
                 _logText.text = _logData;
-                _logText.fontSize = logFontSize;
             }
             
             // Log Panel 활성/비활성 동기화
@@ -138,115 +179,11 @@ namespace Backend
             _logData += line + "\n";
             Debug.Log($"[BackendUI] {msg}");
 
-            // 로그가 너무 길어지면 자르기 (선택)
+            // 로그가 너무 길어지면 자르기
             if (_logData.Length > 2000)
             {
                 _logData = _logData.Substring(_logData.Length - 2000);
             }
-        }
-
-        private void CreateUI()
-        {
-            // 1. Canvas 생성
-            _canvasObj = new GameObject("BackendStatusCanvas");
-            var canvas = _canvasObj.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 999; // 최상단 노출
-            _canvasObj.AddComponent<CanvasScaler>();
-            _canvasObj.AddComponent<GraphicRaycaster>();
-            if (transform.parent != null) _canvasObj.transform.SetParent(transform, false);
-
-            // 2. Player ID Text (좌측 상단)
-            CreatePlayerIDText();
-
-            // 3. Log Window (하단 패널)
-            CreateLogWindow();
-
-            // 4. Toggle Hint Text (우측 상단)
-            CreateToggleHintText();
-        }
-
-        private void CreatePlayerIDText()
-        {
-            var textObj = new GameObject("PlayerIDText");
-            textObj.transform.SetParent(_canvasObj.transform, false);
-            
-            _playerIDText = textObj.AddComponent<Text>();
-            _playerIDText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            _playerIDText.alignment = TextAnchor.UpperLeft;
-            
-            // RectTransform 설정 (Top-Left)
-            RectTransform rect = _playerIDText.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0, 1);
-            rect.anchorMax = new Vector2(0, 1);
-            rect.pivot = new Vector2(0, 1);
-            rect.anchoredPosition = new Vector2(10, -10);
-            rect.sizeDelta = new Vector2(400, 50);
-            
-            // 그림자 효과 추가
-            textObj.AddComponent<Outline>().effectDistance = new Vector2(1, -1);
-        }
-
-        private void CreateLogWindow()
-        {
-            // Panel 생성
-            _logPanelObj = new GameObject("LogPanel");
-            _logPanelObj.transform.SetParent(_canvasObj.transform, false);
-            
-            // 반투명 검은 배경
-            Image bg = _logPanelObj.AddComponent<Image>();
-            bg.color = new Color(0, 0, 0, 0.7f);
-
-            // 하단 1/3 차지하도록 설정
-            RectTransform rect = _logPanelObj.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0, 0);
-            rect.anchorMax = new Vector2(1, 0.35f); // 화면 하단 35%
-            rect.offsetMin = Vector2.zero;
-            rect.offsetMax = Vector2.zero;
-
-            // Log Text
-            var logTextObj = new GameObject("LogText");
-            logTextObj.transform.SetParent(_logPanelObj.transform, false);
-            
-            _logText = logTextObj.AddComponent<Text>();
-            _logText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            _logText.color = Color.green;
-            _logText.alignment = TextAnchor.LowerLeft;
-            _logText.verticalOverflow = VerticalWrapMode.Truncate;
-            
-            // 텍스트 영역 설정 (패딩)
-            RectTransform textRect = _logText.GetComponent<RectTransform>();
-            textRect.anchorMin = Vector2.zero;
-            textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = new Vector2(10, 10);
-            textRect.offsetMax = new Vector2(-10, -10);
-            
-            _logPanelObj.SetActive(showLogWindow);
-        }
-
-        private void CreateToggleHintText()
-        {
-            var textObj = new GameObject("ToggleHintText");
-            // 검은색 패널(_logPanelObj)의 자식으로 설정
-            textObj.transform.SetParent(_logPanelObj.transform, false);
-            
-            var hintText = textObj.AddComponent<Text>();
-            hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            hintText.alignment = TextAnchor.UpperRight;
-            hintText.text = $"Log: {toggleKey}";
-            hintText.fontSize = 20;
-            hintText.color = Color.white;
-            
-            // RectTransform 설정 (Top-Right)
-            RectTransform rect = hintText.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(1, 1);
-            rect.anchorMax = new Vector2(1, 1);
-            rect.pivot = new Vector2(1, 1);
-            rect.anchoredPosition = new Vector2(-10, -10);
-            rect.sizeDelta = new Vector2(200, 50);
-            
-            // 그림자 효과
-            textObj.AddComponent<Outline>().effectDistance = new Vector2(1, -1);
         }
     }
 }

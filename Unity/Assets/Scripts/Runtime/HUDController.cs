@@ -17,6 +17,7 @@ public class HUDController : UIBase
         { "a2", "Canvas_A2_Inventory" },
         { "a3", "Canvas_a3_Growth" },  // Growth Menu
         { "a4", "Canvas_a4_Dungeon" }, // Dungeon Menu
+        { "a5", "Canvas_a5_Quest" },   // Quest Menu
         { "a6", "Canvas_a6_Shop" },    // Shop Menu
         { "HeroDetail", "Canvas_HeroDetailPopup" }, // Hero Detail Popup
         { "Chat", "Canvas_ChatOverlay" } // Maps "Chat" button to Overlay
@@ -93,6 +94,10 @@ public class HUDController : UIBase
         // 3. GLOBAL: Find "b101" (Close) buttons in ALL Canvases (Scene)
         // This ensures ANY menu with a b101 button will close itself when clicked.
         RegisterGlobalCloseButtons();
+
+        // 4. GLOBAL: Find navigation buttons (a1~a6) in ALL sub-menu Canvases
+        // This ensures sub-menu navigation buttons work like the main HUD
+        RegisterSubMenuNavigationButtons();
     }
 
     private void RegisterGlobalCloseButtons()
@@ -159,6 +164,45 @@ public class HUDController : UIBase
         
         // Register Hero Item Click Handlers (D121-D150 etc.)
         RegisterHeroItemClickHandlers();
+    }
+
+    /// <summary>
+    /// 서브 메뉴의 네비게이션 버튼 등록 (AB1 패널의 a1~a6 버튼)
+    /// </summary>
+    private void RegisterSubMenuNavigationButtons()
+    {
+        // 모든 Canvas 찾기 (서브 메뉴들)
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>(true);
+
+        foreach (var canvas in allCanvases)
+        {
+            // HUD 자체는 제외 (이미 Awake에서 처리됨)
+            if (canvas.name == "HUD_Canvas") continue;
+
+            // AB1 패널 찾기
+            Transform ab1Panel = canvas.transform.Find("Panel_AB1_BottomHUD");
+            if (ab1Panel == null) continue;
+
+            // AB1 패널의 모든 버튼 찾기
+            var buttons = ab1Panel.GetComponentsInChildren<Button>(true);
+            foreach (var btn in buttons)
+            {
+                // Btn_Menu_a1 ~ Btn_Menu_a6 버튼 처리
+                if (btn.name.StartsWith("Btn_Menu_a"))
+                {
+                    string id = btn.name.Replace("Btn_Menu_", "");
+
+                    // a99는 제외 (닫기 버튼)
+                    if (id == "a99") continue;
+
+                    // 버튼 클릭 시 메뉴 전환
+                    btn.onClick.RemoveAllListeners(); // 기존 리스너 제거
+                    btn.onClick.AddListener(() => OnMenuToggleClicked(btn, id));
+
+                    Debug.Log($"HUDController: {canvas.name}의 {btn.name} 버튼에 메뉴 전환 리스너 등록");
+                }
+            }
+        }
     }
     
     private void RegisterHeroItemClickHandlers()
